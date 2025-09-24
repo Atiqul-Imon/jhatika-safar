@@ -23,7 +23,7 @@ const navigation = {
   social: [
     {
       name: 'Facebook',
-      href: '#',
+      href: 'https://www.facebook.com/Jhatikasofor',
       icon: (props: any) => (
         <svg fill="currentColor" viewBox="0 0 24 24" {...props}>
           <path
@@ -160,7 +160,7 @@ export default function Footer() {
         <div className="border-t border-gray-800 mt-8 pt-8">
           <div className="flex flex-col md:flex-row justify-between items-center">
             <div className="text-gray-300 text-sm font-medium">
-              © 2024 Jhatika Sofor. All rights reserved.
+              © {new Date().getFullYear()} Jhatika Sofor. All rights reserved.
             </div>
             <div className="flex space-x-6 mt-4 md:mt-0">
               {navigation.support.map((item) => (
@@ -172,6 +172,24 @@ export default function Footer() {
                   {item.name}
                 </Link>
               ))}
+            </div>
+          </div>
+          
+          {/* Developer Credit */}
+          <div className="mt-6 pt-6 border-t border-gray-800">
+            <div className="text-center">
+              <p className="text-gray-400 text-xs">
+                Need a professional website?{' '}
+                <a
+                  href="https://pixelforgebd.com"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="text-green-400 hover:text-green-300 transition-colors duration-200 font-medium"
+                >
+                  Pixel Forge
+                </a>
+                {' '}creates modern, fast websites that grow your business
+              </p>
             </div>
           </div>
         </div>
