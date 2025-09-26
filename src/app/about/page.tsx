@@ -61,7 +61,7 @@ export default function AboutPage() {
             About Us
           </h1>
           <p className="text-xl md:text-2xl text-blue-100 max-w-4xl mx-auto leading-relaxed">
-            Jhatika Sofor - Bangladesh's Most Trusted Travel Agency
+            Jhatika Sofor - Bangladesh&apos;s Most Trusted Travel Agency
           </p>
         </div>
       </div>
@@ -82,7 +82,7 @@ export default function AboutPage() {
                 </p>
                 <p>
                   We believe that travel is not just about seeing places, it is an experience
-                  that enriches people's lives. Our team has traveled to every corner of Bangladesh
+                  that enriches people&apos;s lives. Our team has traveled to every corner of Bangladesh
                   and gained deep knowledge of local culture, history, and natural beauty.
                 </p>
                 <p>
@@ -250,8 +250,8 @@ export default function AboutPage() {
                 Our Vision
               </h3>
               <p className="text-gray-600 leading-relaxed">
-                To be established as a leading travel agency in Bangladesh's tourism industry.
-                We want to contribute to the development of Bangladesh's tourism industry
+                To be established as a leading travel agency in Bangladesh&apos;s tourism industry.
+                We want to contribute to the development of Bangladesh&apos;s tourism industry
                 and present Bangladesh as an attractive destination to travelers worldwide.
               </p>
             </div>

@@ -1,22 +1,66 @@
 import type { NextConfig } from "next";
 
 const nextConfig: NextConfig = {
-      images: {
-        remotePatterns: [
+  // Image optimization configuration
+  images: {
+    remotePatterns: [
+      {
+        protocol: 'https',
+        hostname: 'res.cloudinary.com',
+        port: '',
+        pathname: '/**',
+      },
+      {
+        protocol: 'https',
+        hostname: 'images.unsplash.com',
+        port: '',
+        pathname: '/**',
+      },
+    ],
+    // Enable image optimization for better performance
+    formats: ['image/webp', 'image/avif'],
+    minimumCacheTTL: 60,
+  },
+  
+  // Production optimizations
+  compress: true,
+  poweredByHeader: false,
+  
+  // Environment variables
+  env: {
+    CUSTOM_KEY: process.env.CUSTOM_KEY,
+  },
+  
+  // Experimental features for better performance
+  experimental: {
+    optimizeCss: true,
+  },
+  
+  // Output configuration for Vercel
+  output: 'standalone',
+  
+  // Headers for security and performance
+  async headers() {
+    return [
+      {
+        source: '/(.*)',
+        headers: [
           {
-            protocol: 'https',
-            hostname: 'res.cloudinary.com',
-            port: '',
-            pathname: '/**',
+            key: 'X-Frame-Options',
+            value: 'DENY',
           },
           {
-            protocol: 'https',
-            hostname: 'images.unsplash.com',
-            port: '',
-            pathname: '/**',
+            key: 'X-Content-Type-Options',
+            value: 'nosniff',
+          },
+          {
+            key: 'Referrer-Policy',
+            value: 'origin-when-cross-origin',
           },
         ],
       },
+    ];
+  },
 };
 
 export default nextConfig;

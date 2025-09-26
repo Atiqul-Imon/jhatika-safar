@@ -84,7 +84,7 @@ export default function TourForm({ tour, onSubmit, onCancel, loading = false }: 
       setFormData(prev => ({
         ...prev,
         [parent]: {
-          ...prev[parent as keyof typeof prev],
+          ...(prev[parent as keyof typeof prev] as any || {}),
           [child]: type === 'number' ? parseInt(value) || 0 : value
         }
       }))
@@ -108,7 +108,7 @@ export default function TourForm({ tour, onSubmit, onCancel, loading = false }: 
   const handleArrayChange = (field: string, index: number, value: string) => {
     setFormData(prev => ({
       ...prev,
-      [field]: prev[field as keyof typeof prev].map((item: any, i: number) => 
+      [field]: (prev[field as keyof typeof prev] as any[]).map((item: any, i: number) => 
         i === index ? value : item
       )
     }))
@@ -117,14 +117,14 @@ export default function TourForm({ tour, onSubmit, onCancel, loading = false }: 
   const addArrayItem = (field: string) => {
     setFormData(prev => ({
       ...prev,
-      [field]: [...prev[field as keyof typeof prev], '']
+      [field]: [...(prev[field as keyof typeof prev] as any[]), '']
     }))
   }
 
   const removeArrayItem = (field: string, index: number) => {
     setFormData(prev => ({
       ...prev,
-      [field]: prev[field as keyof typeof prev].filter((_: any, i: number) => i !== index)
+      [field]: (prev[field as keyof typeof prev] as any[]).filter((_: any, i: number) => i !== index)
     }))
   }
 

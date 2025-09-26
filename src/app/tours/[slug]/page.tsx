@@ -15,9 +15,9 @@ import TourGallery from '@/components/ui/TourGallery'
 import ItineraryAccordion from '@/components/ui/ItineraryAccordion'
 
 interface TourDetailPageProps {
-  params: {
+  params: Promise<{
     slug: string
-  }
+  }>
 }
 
 export async function generateStaticParams() {
@@ -103,7 +103,7 @@ export default async function TourDetailPage({ params }: TourDetailPageProps) {
                 ট্যুরের বিশেষত্ব
               </h2>
               <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-                {tour.highlights.map((highlight, index) => (
+                {tour.highlights.map((highlight: string, index: number) => (
                   <div key={index} className="flex items-start space-x-3">
                     <CheckIcon className="h-5 w-5 text-green-500 mt-1 flex-shrink-0" />
                     <span className="text-gray-700">{highlight}</span>
@@ -131,7 +131,7 @@ export default async function TourDetailPage({ params }: TourDetailPageProps) {
                   অন্তর্ভুক্ত
                 </h3>
                 <ul className="space-y-2">
-                  {tour.includes.map((item, index) => (
+                  {tour.includes.map((item: string, index: number) => (
                     <li key={index} className="flex items-start space-x-2">
                       <CheckIcon className="h-4 w-4 text-green-500 mt-1 flex-shrink-0" />
                       <span className="text-gray-700 text-sm">{item}</span>
@@ -146,7 +146,7 @@ export default async function TourDetailPage({ params }: TourDetailPageProps) {
                   অন্তর্ভুক্ত নয়
                 </h3>
                 <ul className="space-y-2">
-                  {tour.excludes.map((item, index) => (
+                  {tour.excludes.map((item: string, index: number) => (
                     <li key={index} className="flex items-start space-x-2">
                       <XMarkIcon className="h-4 w-4 text-red-500 mt-1 flex-shrink-0" />
                       <span className="text-gray-700 text-sm">{item}</span>

@@ -45,11 +45,11 @@ export default function BookingForm({ tour, onBookingSubmit, bookingData, setBoo
     if (name === 'numberOfPeople') {
       const people = parseInt(value) || 1
       const totalPrice = tour.price * people
-      setBookingData(prev => ({
-        ...prev,
+      setBookingData({
+        ...bookingData,
         numberOfPeople: people,
         totalPrice: totalPrice
-      }))
+      })
     }
 
     if (name === 'startDate') {
@@ -121,7 +121,7 @@ export default function BookingForm({ tour, onBookingSubmit, bookingData, setBoo
             customerEmail: formData.customerEmail,
             customerPhone: formData.customerPhone,
             customerAddress: formData.customerAddress,
-            tourId: tour._id,
+            tourId: tour.id,
             numberOfPeople: formData.numberOfPeople,
             startDate: formData.startDate,
             specialRequests: formData.specialRequests
@@ -133,7 +133,7 @@ export default function BookingForm({ tour, onBookingSubmit, bookingData, setBoo
         if (result.success) {
           const bookingSubmission = {
             ...formData,
-            tourId: tour._id,
+            tourId: tour.id,
             tour: tour,
             totalPrice: bookingData.totalPrice || tour.price,
             status: 'pending' as const,

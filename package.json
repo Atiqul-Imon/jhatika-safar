@@ -7,8 +7,12 @@
     "build": "next build",
     "start": "next start",
     "lint": "eslint",
+    "lint:fix": "eslint --fix",
+    "type-check": "tsc --noEmit",
     "create-admin": "node src/scripts/createAdmin.js",
-    "populate-tours": "node src/scripts/populateTours.js"
+    "populate-tours": "node src/scripts/populateTours.js",
+    "postbuild": "next-sitemap",
+    "vercel-build": "npm run build"
   },
   "dependencies": {
     "@headlessui/react": "^2.2.8",

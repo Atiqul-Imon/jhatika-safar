@@ -3,7 +3,6 @@
 import { useState, useEffect } from 'react'
 import { 
   ChartBarIcon, 
-  UsersIcon, 
   MapIcon, 
   CalendarDaysIcon,
   CurrencyDollarIcon,
@@ -11,10 +10,6 @@ import {
   PencilIcon,
   TrashIcon,
   EnvelopeIcon,
-  PhoneIcon,
-  CheckCircleIcon,
-  XCircleIcon,
-  ClockIcon,
   PlusIcon,
   ArrowRightOnRectangleIcon
 } from '@heroicons/react/24/outline'
@@ -97,7 +92,7 @@ export default function AdminDashboard() {
   const [tours, setTours] = useState<Tour[]>([])
   const [selectedStatus, setSelectedStatus] = useState('all')
   const [showTourForm, setShowTourForm] = useState(false)
-  const [editingTour, setEditingTour] = useState<any>(null)
+  const [editingTour, setEditingTour] = useState<Tour | null>(null)
   const [tourFormLoading, setTourFormLoading] = useState(false)
   
   const { user, logout } = useAuth()
@@ -249,7 +244,7 @@ export default function AdminDashboard() {
   }
 
   // Handle tour form submission
-  const handleTourSubmit = async (tourData: any) => {
+  const handleTourSubmit = async (tourData: Partial<Tour>) => {
     setTourFormLoading(true)
     try {
       const url = editingTour ? `/api/tours/${editingTour._id}` : '/api/tours'
@@ -282,7 +277,7 @@ export default function AdminDashboard() {
   }
 
   // Handle edit tour
-  const handleEditTour = (tour: any) => {
+  const handleEditTour = (tour: Tour) => {
     setEditingTour(tour)
     setShowTourForm(true)
   }
