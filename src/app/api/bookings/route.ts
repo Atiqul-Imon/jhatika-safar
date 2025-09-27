@@ -3,7 +3,7 @@ import connectDB from '@/lib/mongodb'
 import Booking from '@/models/Booking'
 import Tour from '@/models/Tour'
 
-// GET - Fetch all bookings
+// GET - Fetch all bookings with pagination and caching
 export async function GET(request: NextRequest) {
   try {
     await connectDB()
@@ -11,27 +11,55 @@ export async function GET(request: NextRequest) {
     const { searchParams } = new URL(request.url)
     const status = searchParams.get('status')
     const paymentStatus = searchParams.get('paymentStatus')
-    const limit = searchParams.get('limit')
-    const sort = searchParams.get('sort') || '-createdAt'
+    const limit = parseInt(searchParams.get('limit') || '20')
+    const page = parseInt(searchParams.get('page') || '1')
+    const sort = searchParams.get('sort') || 'createdAt'
+    const order = searchParams.get('order') || 'desc'
     
     // Build query
     const query: any = {}
     if (status) query.status = status
     if (paymentStatus) query.paymentStatus = paymentStatus
     
-    // Build options
-    const options: any = { sort }
-    if (limit) options.limit = parseInt(limit)
+    // Build sort options
+    const sortOptions: any = {}
+    sortOptions[sort] = order === 'desc' ? -1 : 1
     
-    const bookings = await Booking.find(query, null, options)
+    // Calculate pagination
+    const skip = (page - 1) * limit
+    
+    // Execute queries in parallel for better performance
+    const [bookings, totalCount] = await Promise.all([
+      Booking.find(query, null, { 
+        sort: sortOptions, 
+        limit, 
+        skip 
+      })
       .populate('tourId', 'title slug')
-      .lean()
+      .select('customerName customerEmail customerPhone tourId tourTitle numberOfPeople startDate totalPrice status paymentStatus createdAt')
+      .lean(),
+      Booking.countDocuments(query)
+    ])
     
-    return NextResponse.json({
+    const totalPages = Math.ceil(totalCount / limit)
+    
+    const response = NextResponse.json({
       success: true,
       data: bookings,
-      count: bookings.length
+      pagination: {
+        currentPage: page,
+        totalPages,
+        totalCount,
+        limit,
+        hasNext: page < totalPages,
+        hasPrev: page > 1
+      }
     })
+    
+    // Add cache headers - 5 minutes for bookings
+    response.headers.set('Cache-Control', 'public, s-maxage=300, stale-while-revalidate=60')
+    
+    return response
     
   } catch (error) {
     console.error('Error fetching bookings:', error)

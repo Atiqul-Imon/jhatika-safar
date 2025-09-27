@@ -17,12 +17,17 @@ export default function ToursPage() {
   const [priceRange, setPriceRange] = useState([0, 50000])
   const [showFilters, setShowFilters] = useState(false)
 
-  // Fetch tours from API
+  // Fetch tours from API with pagination
   useEffect(() => {
     const fetchTours = async () => {
       try {
         setLoading(true)
-        const response = await fetch('/api/tours?status=active')
+        // Optimized: Fetch with pagination and caching
+        const response = await fetch('/api/tours?status=active&limit=50', {
+          headers: {
+            'Cache-Control': 'max-age=600' // Client-side caching for 10 minutes
+          }
+        })
         const result = await response.json()
         
         if (result.success) {

@@ -1,6 +1,6 @@
 'use client'
 
-import { useState, useEffect } from 'react'
+import { useState, useEffect, Suspense } from 'react'
 import { useSearchParams } from 'next/navigation'
 import { CalendarDaysIcon, UsersIcon, MapPinIcon, ClockIcon } from '@heroicons/react/24/outline'
 import { tours } from '@/data/tours'
@@ -8,7 +8,7 @@ import { Tour, Booking } from '@/types'
 import { formatPrice, formatDate } from '@/lib/utils'
 import BookingForm from '@/components/forms/BookingForm'
 
-export default function BookingPage() {
+function BookingPageContent() {
   const searchParams = useSearchParams()
   const tourId = searchParams.get('tour')
   const [selectedTour, setSelectedTour] = useState<Tour | null>(null)
@@ -160,5 +160,20 @@ export default function BookingPage() {
         </div>
       </div>
     </div>
+  )
+}
+
+export default function BookingPage() {
+  return (
+    <Suspense fallback={
+      <div className="min-h-screen bg-gradient-to-br from-green-50 via-white to-green-100 flex items-center justify-center">
+        <div className="text-center">
+          <div className="animate-spin rounded-full h-12 w-12 border-b-2 border-green-600 mx-auto mb-4"></div>
+          <p className="text-gray-600">Loading booking page...</p>
+        </div>
+      </div>
+    }>
+      <BookingPageContent />
+    </Suspense>
   )
 }

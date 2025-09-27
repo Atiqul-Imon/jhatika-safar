@@ -171,5 +171,10 @@ TourSchema.index({ featured: 1 })
 TourSchema.index({ status: 1 })
 TourSchema.index({ price: 1 })
 TourSchema.index({ createdAt: -1 })
+// Compound indexes for complex queries
+TourSchema.index({ status: 1, category: 1 })
+TourSchema.index({ status: 1, featured: 1 })
+TourSchema.index({ status: 1, createdAt: -1 })
+TourSchema.index({ category: 1, price: 1 })
 
 export default mongoose.models.Tour || mongoose.model<ITour>('Tour', TourSchema)

@@ -1,24 +1,30 @@
 import Link from 'next/link'
 import Image from 'next/image'
-import { MapPinIcon, ClockIcon, UsersIcon } from '@heroicons/react/24/outline'
+import { MapPinIcon, ClockIcon, UsersIcon, CalendarDaysIcon, StarIcon } from '@heroicons/react/24/outline'
 import { Tour } from '@/types'
 import { formatPrice } from '@/lib/utils'
 
 interface TourCardProps {
   tour: Tour
-    variant?: 'default' | 'compact' | 'detailed'
+  variant?: 'default' | 'compact' | 'detailed'
   showButtons?: boolean
   className?: string
+  showUpcomingBadge?: boolean
 }
 
 export default function TourCard({ 
   tour, 
   variant = 'default', 
   showButtons = true,
-  className = ''
+  className = '',
+  showUpcomingBadge = false
 }: TourCardProps) {
   const isCompact = variant === 'compact'
   const isDetailed = variant === 'detailed'
+  
+  // Check if tour is upcoming (created within last 30 days)
+  const isUpcoming = showUpcomingBadge && tour.createdAt && 
+    (new Date().getTime() - new Date(tour.createdAt).getTime()) < (30 * 24 * 60 * 60 * 1000)
   
   return (
     <div className={`bg-white rounded-2xl shadow-lg overflow-hidden hover:shadow-xl transition-all duration-300 transform hover:-translate-y-2 border border-green-100 hover:border-green-200 ${className}`}>
@@ -30,6 +36,29 @@ export default function TourCard({
           fill
           className="object-cover transition-transform duration-300 hover:scale-110"
         />
+        
+        {/* Upcoming Badge */}
+        {isUpcoming && (
+          <div className="absolute top-4 left-4 bg-gradient-to-r from-green-500 to-green-600 text-white px-3 py-1 rounded-full text-xs font-semibold flex items-center shadow-lg">
+            <CalendarDaysIcon className="h-3 w-3 mr-1" />
+            New
+          </div>
+        )}
+        
+        {/* Featured Badge */}
+        {tour.featured && !isUpcoming && (
+          <div className="absolute top-4 left-4 bg-gradient-to-r from-yellow-500 to-orange-500 text-white px-3 py-1 rounded-full text-xs font-semibold flex items-center shadow-lg">
+            <StarIcon className="h-3 w-3 mr-1" />
+            Featured
+          </div>
+        )}
+        
+        {/* Price Badge */}
+        {tour.originalPrice && tour.originalPrice > tour.price && (
+          <div className="absolute top-4 right-4 bg-red-500 text-white px-2 py-1 rounded-lg text-xs font-bold shadow-lg">
+            {Math.round(((tour.originalPrice - tour.price) / tour.originalPrice) * 100)}% OFF
+          </div>
+        )}
       </div>
 
       {/* Content */}
@@ -62,6 +91,14 @@ export default function TourCard({
             <div className="flex items-center text-sm text-gray-700">
               <UsersIcon className="h-4 w-4 mr-2 text-green-500" />
               <span className="font-medium">{tour.groupSize.min}-{tour.groupSize.max} people</span>
+            </div>
+          )}
+          {isUpcoming && tour.createdAt && (
+            <div className="flex items-center text-sm text-green-600">
+              <CalendarDaysIcon className="h-4 w-4 mr-2" />
+              <span className="font-medium">
+                Added {Math.ceil((new Date().getTime() - new Date(tour.createdAt).getTime()) / (1000 * 60 * 60 * 24))} days ago
+              </span>
             </div>
           )}
         </div>

@@ -243,6 +243,273 @@ const sampleTours = [
         accommodation: "None"
       }
     ]
+  },
+  {
+    title: "Bandarban Hill Station Adventure",
+    slug: "bandarban-hill-station-adventure",
+    description: "Explore the breathtaking hill stations of Bandarban, home to the highest peaks in Bangladesh. This 4-day adventure takes you through lush green hills, tribal villages, and stunning waterfalls. Experience the unique culture of indigenous communities and enjoy panoramic views from hilltops. Perfect for adventure seekers and nature enthusiasts.",
+    shortDescription: "4-day hill station adventure in Bandarban",
+    duration: 4,
+    price: 18000,
+    originalPrice: 22000,
+    images: [
+      "https://images.unsplash.com/photo-1506905925346-21bda4d32df4?w=800&h=600&fit=crop",
+      "https://images.unsplash.com/photo-1441974231531-c6227db76b6e?w=800&h=600&fit=crop",
+      "https://images.unsplash.com/photo-1544551763-46a013bb70d5?w=800&h=600&fit=crop"
+    ],
+    destinations: ["Bandarban", "Nilgiri", "Chimbuk Hill", "Boga Lake"],
+    highlights: [
+      "Highest peaks in Bangladesh",
+      "Tribal village visits",
+      "Boga Lake exploration",
+      "Nilgiri hill station",
+      "Indigenous culture experience"
+    ],
+    category: "Adventure",
+    featured: true,
+    difficulty: "Challenging",
+    groupSize: { min: 4, max: 12 },
+    season: ["October", "November", "December", "January", "February", "March"],
+    includes: [
+      "Hill resort accommodation",
+      "All meals",
+      "Transportation",
+      "Local guide",
+      "Entry permits",
+      "Trekking equipment"
+    ],
+    excludes: [
+      "Personal expenses",
+      "Camera fees",
+      "Tips",
+      "Travel insurance"
+    ],
+    itinerary: [
+      {
+        day: 1,
+        title: "Journey to Bandarban",
+        description: "Travel from Dhaka to Bandarban and check into hill resort",
+        activities: ["Scenic drive", "Local market visit", "Sunset viewing"],
+        meals: ["Lunch", "Dinner"],
+        accommodation: "Hill resort"
+      },
+      {
+        day: 2,
+        title: "Nilgiri Hill Station",
+        description: "Visit Nilgiri hill station and enjoy panoramic views",
+        activities: ["Hill trekking", "Photography", "Local culture"],
+        meals: ["Breakfast", "Lunch", "Dinner"],
+        accommodation: "Hill resort"
+      },
+      {
+        day: 3,
+        title: "Boga Lake & Chimbuk Hill",
+        description: "Explore Boga Lake and trek to Chimbuk Hill",
+        activities: ["Lake exploration", "Hill trekking", "Tribal village visit"],
+        meals: ["Breakfast", "Lunch", "Dinner"],
+        accommodation: "Hill resort"
+      },
+      {
+        day: 4,
+        title: "Return Journey",
+        description: "Morning exploration and return to Dhaka",
+        activities: ["Final hill walk", "Local shopping"],
+        meals: ["Breakfast", "Lunch"],
+        accommodation: "None"
+      }
+    ]
+  },
+  {
+    title: "Rangamati Lake City Tour",
+    slug: "rangamati-lake-city-tour",
+    description: "Discover the beautiful lake city of Rangamati, surrounded by hills and water. This 3-day tour offers boat rides on Kaptai Lake, visits to tribal villages, and exploration of the unique floating market. Experience the peaceful atmosphere and learn about the local Chakma culture. Perfect for those seeking tranquility and cultural immersion.",
+    shortDescription: "3-day lake city tour in Rangamati",
+    duration: 3,
+    price: 14000,
+    originalPrice: 17000,
+    images: [
+      "https://images.unsplash.com/photo-1441974231531-c6227db76b6e?w=800&h=600&fit=crop",
+      "https://images.unsplash.com/photo-1544551763-46a013bb70d5?w=800&h=600&fit=crop",
+      "https://images.unsplash.com/photo-1506905925346-21bda4d32df4?w=800&h=600&fit=crop"
+    ],
+    destinations: ["Rangamati", "Kaptai Lake", "Hanging Bridge", "Tribal Museum"],
+    highlights: [
+      "Kaptai Lake boat ride",
+      "Floating market visit",
+      "Hanging Bridge walk",
+      "Chakma culture experience",
+      "Tribal museum tour"
+    ],
+    category: "Cultural",
+    featured: false,
+    difficulty: "Easy",
+    groupSize: { min: 2, max: 18 },
+    season: ["October", "November", "December", "January", "February", "March", "April"],
+    includes: [
+      "Lake resort accommodation",
+      "All meals",
+      "Boat transportation",
+      "Local guide",
+      "Entry fees",
+      "Cultural show"
+    ],
+    excludes: [
+      "Personal expenses",
+      "Handicraft purchase",
+      "Tips",
+      "Travel insurance"
+    ],
+    itinerary: [
+      {
+        day: 1,
+        title: "Arrival in Rangamati",
+        description: "Arrive in Rangamati and check into lake resort",
+        activities: ["Lake view", "Local market", "Cultural show"],
+        meals: ["Lunch", "Dinner"],
+        accommodation: "Lake resort"
+      },
+      {
+        day: 2,
+        title: "Kaptai Lake Exploration",
+        description: "Full day boat ride on Kaptai Lake and floating market",
+        activities: ["Boat ride", "Floating market", "Island visit"],
+        meals: ["Breakfast", "Lunch", "Dinner"],
+        accommodation: "Lake resort"
+      },
+      {
+        day: 3,
+        title: "Cultural Sites & Departure",
+        description: "Visit hanging bridge, tribal museum and return",
+        activities: ["Hanging bridge", "Museum tour", "Local shopping"],
+        meals: ["Breakfast", "Lunch"],
+        accommodation: "None"
+      }
+    ]
+  },
+  {
+    title: "Saint Martin's Island Paradise",
+    slug: "saint-martins-island-paradise",
+    description: "Escape to the only coral island of Bangladesh, Saint Martin's Island. This 3-day island getaway offers pristine beaches, crystal clear waters, and amazing coral reefs. Enjoy snorkeling, beach activities, and fresh seafood. Experience the unique island life and witness stunning sunrises and sunsets. Perfect for beach lovers and water sports enthusiasts.",
+    shortDescription: "3-day coral island paradise at Saint Martin's",
+    duration: 3,
+    price: 16000,
+    originalPrice: 20000,
+    images: [
+      "https://images.unsplash.com/photo-1506905925346-21bda4d32df4?w=800&h=600&fit=crop",
+      "https://images.unsplash.com/photo-1441974231531-c6227db76b6e?w=800&h=600&fit=crop",
+      "https://images.unsplash.com/photo-1544551763-46a013bb70d5?w=800&h=600&fit=crop"
+    ],
+    destinations: ["Saint Martin's Island", "Coral Reef", "Chera Dwip"],
+    highlights: [
+      "Only coral island in Bangladesh",
+      "Snorkeling and diving",
+      "Fresh seafood cuisine",
+      "Coral reef exploration",
+      "Island sunset views"
+    ],
+    category: "Beach",
+    featured: true,
+    difficulty: "Easy",
+    groupSize: { min: 2, max: 20 },
+    season: ["October", "November", "December", "January", "February", "March"],
+    includes: [
+      "Island resort accommodation",
+      "All meals",
+      "Boat transportation",
+      "Snorkeling equipment",
+      "Local guide",
+      "Entry permits"
+    ],
+    excludes: [
+      "Diving equipment rental",
+      "Personal shopping",
+      "Tips",
+      "Travel insurance"
+    ],
+    itinerary: [
+      {
+        day: 1,
+        title: "Journey to Saint Martin's",
+        description: "Travel from Cox's Bazar to Saint Martin's Island",
+        activities: ["Boat journey", "Island exploration", "Sunset viewing"],
+        meals: ["Lunch", "Dinner"],
+        accommodation: "Island resort"
+      },
+      {
+        day: 2,
+        title: "Coral Reef & Chera Dwip",
+        description: "Snorkeling, coral reef exploration and Chera Dwip visit",
+        activities: ["Snorkeling", "Coral viewing", "Island hopping"],
+        meals: ["Breakfast", "Lunch", "Dinner"],
+        accommodation: "Island resort"
+      },
+      {
+        day: 3,
+        title: "Return Journey",
+        description: "Morning beach activities and return to mainland",
+        activities: ["Beach walk", "Final snorkeling", "Shopping"],
+        meals: ["Breakfast", "Lunch"],
+        accommodation: "None"
+      }
+    ]
+  },
+  {
+    title: "Dhaka Heritage Walk",
+    slug: "dhaka-heritage-walk",
+    description: "Explore the rich history and culture of Dhaka, the capital city of Bangladesh. This 2-day heritage tour takes you through ancient monuments, historical sites, and cultural landmarks. Visit Lalbagh Fort, Ahsan Manzil, and experience the vibrant Old Dhaka. Perfect for history enthusiasts and cultural explorers.",
+    shortDescription: "2-day heritage walk through historical Dhaka",
+    duration: 2,
+    price: 8000,
+    images: [
+      "https://images.unsplash.com/photo-1544551763-46a013bb70d5?w=800&h=600&fit=crop",
+      "https://images.unsplash.com/photo-1506905925346-21bda4d32df4?w=800&h=600&fit=crop",
+      "https://images.unsplash.com/photo-1441974231531-c6227db76b6e?w=800&h=600&fit=crop"
+    ],
+    destinations: ["Lalbagh Fort", "Ahsan Manzil", "Old Dhaka", "Star Mosque"],
+    highlights: [
+      "Lalbagh Fort exploration",
+      "Ahsan Manzil palace tour",
+      "Old Dhaka street food",
+      "Star Mosque visit",
+      "Historical architecture"
+    ],
+    category: "Cultural",
+    featured: false,
+    difficulty: "Easy",
+    groupSize: { min: 2, max: 15 },
+    season: ["October", "November", "December", "January", "February", "March", "April"],
+    includes: [
+      "Hotel accommodation",
+      "All meals",
+      "Transportation",
+      "Local guide",
+      "Entry fees",
+      "Cultural experiences"
+    ],
+    excludes: [
+      "Personal expenses",
+      "Shopping",
+      "Tips",
+      "Travel insurance"
+    ],
+    itinerary: [
+      {
+        day: 1,
+        title: "Historical Monuments",
+        description: "Visit Lalbagh Fort, Ahsan Manzil and historical sites",
+        activities: ["Fort exploration", "Palace tour", "Historical walk"],
+        meals: ["Lunch", "Dinner"],
+        accommodation: "Hotel"
+      },
+      {
+        day: 2,
+        title: "Old Dhaka & Departure",
+        description: "Explore Old Dhaka, Star Mosque and local culture",
+        activities: ["Old Dhaka walk", "Mosque visit", "Street food"],
+        meals: ["Breakfast", "Lunch"],
+        accommodation: "None"
+      }
+    ]
   }
 ]
 

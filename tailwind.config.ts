@@ -14,6 +14,16 @@ const config: Config = {
       colors: {
         background: 'var(--background)',
         foreground: 'var(--foreground)',
+        primary: {
+          DEFAULT: '#059669',
+          dark: '#047857',
+        },
+        secondary: '#f59e0b',
+        accent: '#dc2626',
+      },
+      fontFamily: {
+        sans: ['Roboto', 'system-ui', '-apple-system', 'sans-serif'],
+        serif: ['Playfair Display', 'serif'],
       },
     },
   },

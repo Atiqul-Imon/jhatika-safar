@@ -21,19 +21,7 @@ interface TourDetailPageProps {
 }
 
 export async function generateStaticParams() {
-  try {
-    const response = await fetch(`${process.env.NEXT_PUBLIC_BASE_URL || 'http://localhost:3000'}/api/tours?status=active`)
-    const result = await response.json()
-    
-    if (result.success) {
-      return result.data.map((tour: any) => ({
-        slug: tour.slug,
-      }))
-    }
-  } catch (error) {
-    console.error('Error generating static params:', error)
-  }
-  
+  // Return empty array for static generation - pages will be generated on demand
   return []
 }
 

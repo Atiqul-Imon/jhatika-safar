@@ -78,8 +78,8 @@ export default function BookingForm({ tour, onBookingSubmit, bookingData, setBoo
 
     if (!formData.customerPhone.trim()) {
       newErrors.customerPhone = 'ফোন নম্বর প্রয়োজন'
-    } else if (!/^[0-9+\-\s]+$/.test(formData.customerPhone)) {
-      newErrors.customerPhone = 'বৈধ ফোন নম্বর দিন'
+    } else if (!/^(\+880|880|0)?1[3-9]\d{8}$/.test(formData.customerPhone.replace(/\s/g, ''))) {
+      newErrors.customerPhone = 'বৈধ বাংলাদেশী ফোন নম্বর দিন (যেমন: 01712345678, +8801712345678)'
     }
 
     if (!formData.customerAddress.trim()) {
@@ -212,7 +212,7 @@ export default function BookingForm({ tour, onBookingSubmit, bookingData, setBoo
               className={`w-full px-3 py-2 border rounded-lg focus:ring-2 focus:ring-green-500 focus:border-transparent ${
                 errors.customerPhone ? 'border-red-500' : 'border-gray-300'
               }`}
-              placeholder="+৮৮০ ১৭১৭-১৫১৬৩৬"
+              placeholder="০১৭১২৩৪৫৬৭৮ বা +৮৮০১৭১২৩৪৫৬৭৮"
             />
             {errors.customerPhone && (
               <p className="text-red-500 text-sm mt-1">{errors.customerPhone}</p>

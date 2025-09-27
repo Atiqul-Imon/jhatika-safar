@@ -11,6 +11,7 @@
     "type-check": "tsc --noEmit",
     "create-admin": "node src/scripts/createAdmin.js",
     "populate-tours": "node src/scripts/populateTours.js",
+    "optimize-db": "node src/scripts/optimizeDatabase.js",
     "postbuild": "next-sitemap",
     "vercel-build": "npm run build"
   },
@@ -20,27 +21,29 @@
     "bcryptjs": "^2.4.3",
     "cloudinary": "^2.7.0",
     "clsx": "^2.1.1",
+    "critters": "^0.0.23",
     "date-fns": "^4.1.0",
     "jsonwebtoken": "^9.0.2",
     "lucide-react": "^0.544.0",
     "mongodb": "^6.20.0",
     "mongoose": "^8.18.2",
     "next": "15.5.4",
+    "next-sitemap": "^4.2.3",
     "react": "19.1.0",
     "react-dom": "19.1.0",
     "tailwind-merge": "^3.3.1"
   },
   "devDependencies": {
     "@eslint/eslintrc": "^3",
-    "@tailwindcss/postcss": "^4",
     "@types/bcryptjs": "^2.4.6",
     "@types/jsonwebtoken": "^9.0.7",
     "@types/node": "^20",
     "@types/react": "^19",
     "@types/react-dom": "^19",
+    "autoprefixer": "^10.4.21",
     "eslint": "^9",
     "eslint-config-next": "15.5.4",
-    "tailwindcss": "^4",
+    "tailwindcss": "^3.4.17",
     "typescript": "^5"
   }
 }

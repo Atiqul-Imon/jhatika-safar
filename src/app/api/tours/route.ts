@@ -2,7 +2,7 @@ import { NextRequest, NextResponse } from 'next/server'
 import connectDB from '@/lib/mongodb'
 import Tour from '@/models/Tour'
 
-// GET - Fetch all tours
+// GET - Fetch all tours with pagination and caching
 export async function GET(request: NextRequest) {
   try {
     await connectDB()
@@ -11,7 +11,10 @@ export async function GET(request: NextRequest) {
     const status = searchParams.get('status')
     const category = searchParams.get('category')
     const featured = searchParams.get('featured')
-    const limit = searchParams.get('limit')
+    const limit = parseInt(searchParams.get('limit') || '20')
+    const page = parseInt(searchParams.get('page') || '1')
+    const sort = searchParams.get('sort') || 'createdAt'
+    const order = searchParams.get('order') || 'desc'
     
     // Build query
     const query: any = {}
@@ -19,17 +22,45 @@ export async function GET(request: NextRequest) {
     if (category) query.category = category
     if (featured) query.featured = featured === 'true'
     
-    // Build options
-    const options: any = { sort: { createdAt: -1 } }
-    if (limit) options.limit = parseInt(limit)
+    // Build sort options
+    const sortOptions: any = {}
+    sortOptions[sort] = order === 'desc' ? -1 : 1
     
-    const tours = await Tour.find(query, null, options).lean()
+    // Calculate pagination
+    const skip = (page - 1) * limit
     
-    return NextResponse.json({
+    // Execute queries in parallel for better performance
+    const [tours, totalCount] = await Promise.all([
+      Tour.find(query, null, { 
+        sort: sortOptions, 
+        limit, 
+        skip 
+      })
+      .select('title slug shortDescription duration price images destinations highlights category featured status createdAt')
+      .lean(),
+      Tour.countDocuments(query)
+    ])
+    
+    const totalPages = Math.ceil(totalCount / limit)
+    
+    const response = NextResponse.json({
       success: true,
       data: tours,
-      count: tours.length
+      pagination: {
+        currentPage: page,
+        totalPages,
+        totalCount,
+        limit,
+        hasNext: page < totalPages,
+        hasPrev: page > 1
+      }
     })
+    
+    // Add cache headers - 10 minutes for active tours, 1 hour for others
+    const cacheTime = status === 'active' ? 600 : 3600
+    response.headers.set('Cache-Control', `public, s-maxage=${cacheTime}, stale-while-revalidate=300`)
+    
+    return response
     
   } catch (error) {
     console.error('Error fetching tours:', error)

@@ -1,18 +1,64 @@
+'use client'
+
 import Link from 'next/link'
-import { ArrowRightIcon, StarIcon, MapPinIcon, ClockIcon, UsersIcon } from '@heroicons/react/24/outline'
+import { useState, useEffect } from 'react'
+import { ArrowRightIcon, StarIcon, MapPinIcon, ClockIcon, UsersIcon, CalendarDaysIcon } from '@heroicons/react/24/outline'
 import { featuredTours } from '@/data/tours'
 import { formatPrice } from '@/lib/utils'
 import HeroSection from '@/components/ui/HeroSection'
 import TourCardGrid from '@/components/ui/TourCardGrid'
 import TestimonialSection from '@/components/ui/TestimonialSection'
+import { Tour } from '@/types'
 
 export default function Home() {
+  const [upcomingTours, setUpcomingTours] = useState<Tour[]>([])
+  const [loading, setLoading] = useState(true)
+  const [error, setError] = useState<string | null>(null)
+
+  useEffect(() => {
+    const fetchUpcomingTours = async () => {
+      try {
+        setLoading(true)
+        // Optimized: Fetch only active tours with limit and proper sorting
+        const response = await fetch('/api/tours?status=active&limit=6&sort=createdAt&order=desc', {
+          headers: {
+            'Cache-Control': 'max-age=300' // Client-side caching for 5 minutes
+          }
+        })
+        
+        if (!response.ok) {
+          throw new Error('Failed to fetch tours')
+        }
+        
+        const data = await response.json()
+        console.log('API Response:', data)
+        
+        // Check if data.data exists and is an array
+        if (!data.data || !Array.isArray(data.data)) {
+          console.error('Invalid API response structure:', data)
+          throw new Error('Invalid API response structure')
+        }
+        
+        setUpcomingTours(data.data)
+      } catch (err) {
+        console.error('Error fetching upcoming tours:', err)
+        setError('Failed to load upcoming tours')
+        // Fallback to static data
+        setUpcomingTours(featuredTours)
+      } finally {
+        setLoading(false)
+      }
+    }
+
+    fetchUpcomingTours()
+  }, [])
+
   return (
     <div className="min-h-screen bg-gray-50">
       {/* Hero Section */}
       <HeroSection />
 
-      {/* Featured Tours */}
+      {/* Upcoming Tours */}
       <section className="py-20 bg-white relative overflow-hidden">
         {/* Subtle Background Pattern */}
         <div className="absolute inset-0 opacity-5">
@@ -21,21 +67,62 @@ export default function Home() {
           <div className="absolute -bottom-8 left-20 w-96 h-96 bg-purple-400 rounded-full mix-blend-multiply filter blur-3xl"></div>
         </div>
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-              <div className="text-center mb-12">
-                <h2 className="text-3xl md:text-4xl font-bold text-gray-900 mb-4 font-serif">
-                  Upcoming Tour Packages
-                </h2>
-                <p className="text-lg text-gray-600 max-w-2xl mx-auto">
-                  Travel to the most beautiful places in Bangladesh. Explore our upcoming packages.
-                </p>
-              </div>
+          <div className="text-center mb-12">
+            <div className="flex items-center justify-center mb-4">
+              <CalendarDaysIcon className="h-8 w-8 text-green-600 mr-3" />
+              <h2 className="text-3xl md:text-4xl font-bold text-gray-900 font-serif">
+                Upcoming Tour Packages
+              </h2>
+            </div>
+            <p className="text-lg text-gray-600 max-w-2xl mx-auto">
+              Discover our latest and most exciting tour packages. Book now and create unforgettable memories.
+            </p>
+          </div>
 
-          <TourCardGrid tours={featuredTours} />
+          {loading ? (
+            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+              {[...Array(6)].map((_, index) => (
+                <div key={index} className="bg-white rounded-2xl shadow-lg overflow-hidden animate-pulse">
+                  <div className="h-64 bg-gray-200"></div>
+                  <div className="p-6">
+                    <div className="h-6 bg-gray-200 rounded mb-3"></div>
+                    <div className="h-4 bg-gray-200 rounded mb-2"></div>
+                    <div className="h-4 bg-gray-200 rounded mb-4 w-3/4"></div>
+                    <div className="h-8 bg-gray-200 rounded"></div>
+                  </div>
+                </div>
+              ))}
+            </div>
+          ) : error ? (
+            <div className="text-center py-12">
+              <div className="text-red-500 text-6xl mb-4">⚠️</div>
+              <h3 className="text-xl font-semibold text-gray-900 mb-2">
+                Unable to load tours
+              </h3>
+              <p className="text-gray-600 mb-6">
+                {error}. Showing featured tours instead.
+              </p>
+              <TourCardGrid tours={featuredTours} />
+            </div>
+          ) : upcomingTours.length > 0 ? (
+            <TourCardGrid tours={upcomingTours} showUpcomingBadge={true} />
+          ) : (
+            <div className="text-center py-12">
+              <CalendarDaysIcon className="mx-auto h-16 w-16 text-gray-400 mb-4" />
+              <h3 className="text-xl font-semibold text-gray-900 mb-2">
+                No upcoming tours available
+              </h3>
+              <p className="text-gray-600 mb-6">
+                Check back soon for new tour packages!
+              </p>
+              <TourCardGrid tours={featuredTours} />
+            </div>
+          )}
 
           <div className="text-center mt-12">
             <Link
               href="/tours"
-              className="inline-flex items-center px-8 py-3 bg-gradient-primary text-white font-medium rounded-lg hover:shadow-lg transition-all duration-200"
+              className="inline-flex items-center px-8 py-3 bg-gradient-primary text-white font-medium rounded-lg hover:shadow-lg transition-all duration-200 transform hover:-translate-y-1"
             >
               View All Tours
               <ArrowRightIcon className="ml-2 h-5 w-5" />

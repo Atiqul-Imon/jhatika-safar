@@ -10,7 +10,7 @@ export interface IBooking extends Document {
   startDate: Date
   endDate?: Date
   totalPrice: number
-  status: 'pending' | 'confirmed' | 'completed' | 'cancelled'
+  status: 'pending' | 'paused' | 'confirmed' | 'completed' | 'cancelled'
   specialRequests?: string
   paymentStatus: 'pending' | 'paid' | 'refunded'
   createdAt: Date
@@ -35,7 +35,8 @@ const BookingSchema = new Schema<IBooking>({
     type: String,
     required: [true, 'Customer phone is required'],
     trim: true,
-    maxlength: [20, 'Phone number cannot be more than 20 characters']
+    maxlength: [20, 'Phone number cannot be more than 20 characters'],
+    match: [/^(\+880|880|0)?1[3-9]\d{8}$/, 'Please enter a valid Bangladeshi phone number']
   },
   tourId: {
     type: String,
@@ -66,7 +67,7 @@ const BookingSchema = new Schema<IBooking>({
   },
   status: {
     type: String,
-    enum: ['pending', 'confirmed', 'completed', 'cancelled'],
+    enum: ['pending', 'paused', 'confirmed', 'completed', 'cancelled'],
     default: 'pending'
   },
   specialRequests: {
@@ -89,5 +90,10 @@ BookingSchema.index({ tourId: 1 })
 BookingSchema.index({ status: 1 })
 BookingSchema.index({ startDate: 1 })
 BookingSchema.index({ createdAt: -1 })
+// Compound indexes for complex queries
+BookingSchema.index({ status: 1, paymentStatus: 1 })
+BookingSchema.index({ status: 1, createdAt: -1 })
+BookingSchema.index({ tourId: 1, status: 1 })
+BookingSchema.index({ customerEmail: 1, status: 1 })
 
 export default mongoose.models.Booking || mongoose.model<IBooking>('Booking', BookingSchema)

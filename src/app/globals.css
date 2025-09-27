@@ -1,4 +1,7 @@
-@import "tailwindcss";
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
 @import url('https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;500;700;900&display=swap');
 @import url('https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;500;600;700;800;900&display=swap');
 
@@ -9,17 +12,22 @@
   --primary-dark: #047857;
   --secondary: #f59e0b;
   --accent: #dc2626;
-}
-
-@theme inline {
-  --color-background: var(--background);
-  --color-foreground: var(--foreground);
-  --color-primary: var(--primary);
-  --color-primary-dark: var(--primary-dark);
-  --color-secondary: var(--secondary);
-  --color-accent: var(--accent);
-  --font-sans: 'Roboto', system-ui, -apple-system, sans-serif;
-  --font-serif: 'Playfair Display', serif;
+  
+  /* Admin Panel Professional Colors */
+  --admin-bg: #f8fafc;
+  --admin-sidebar: #1e293b;
+  --admin-sidebar-hover: #334155;
+  --admin-card: #ffffff;
+  --admin-border: #e2e8f0;
+  --admin-text: #1e293b;
+  --admin-text-muted: #64748b;
+  --admin-success: #10b981;
+  --admin-warning: #f59e0b;
+  --admin-error: #ef4444;
+  --admin-info: #3b82f6;
+  --admin-gradient: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+  --admin-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06);
+  --admin-shadow-lg: 0 10px 15px -3px rgba(0, 0, 0, 0.1), 0 4px 6px -2px rgba(0, 0, 0, 0.05);
 }
 
 body {
@@ -216,4 +224,269 @@ body {
     .hover-lift:hover {
       transform: translateY(-4px);
       box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.1), 0 10px 10px -5px rgba(0, 0, 0, 0.04);
+    }
+
+    /* Admin Panel Professional Styles */
+    .admin-bg {
+      background: var(--admin-bg);
+    }
+
+    .admin-sidebar {
+      background: var(--admin-sidebar);
+    }
+
+    .admin-sidebar-hover:hover {
+      background: var(--admin-sidebar-hover);
+    }
+
+    .admin-card {
+      background: var(--admin-card);
+      border: 1px solid var(--admin-border);
+      box-shadow: var(--admin-shadow);
+    }
+
+    .admin-card-lg {
+      background: var(--admin-card);
+      border: 1px solid var(--admin-border);
+      box-shadow: var(--admin-shadow-lg);
+    }
+
+    .admin-text {
+      color: var(--admin-text);
+    }
+
+    .admin-text-muted {
+      color: var(--admin-text-muted);
+    }
+
+    .admin-gradient {
+      background: var(--admin-gradient);
+    }
+
+    /* Status Colors */
+    .status-pending {
+      background: #fef3c7;
+      color: #92400e;
+      border: 1px solid #fbbf24;
+    }
+
+    .status-paused {
+      background: #fed7aa;
+      color: #9a3412;
+      border: 1px solid #fb923c;
+    }
+
+    .status-confirmed {
+      background: #d1fae5;
+      color: #065f46;
+      border: 1px solid #34d399;
+    }
+
+    .status-completed {
+      background: #dbeafe;
+      color: #1e40af;
+      border: 1px solid #60a5fa;
+    }
+
+    .status-cancelled {
+      background: #fee2e2;
+      color: #991b1b;
+      border: 1px solid #f87171;
+    }
+
+    /* Professional Button Styles */
+    .btn-primary {
+      background: var(--admin-gradient);
+      color: white;
+      border: none;
+      padding: 0.75rem 1.5rem;
+      border-radius: 0.5rem;
+      font-weight: 500;
+      transition: all 0.2s ease;
+      box-shadow: var(--admin-shadow);
+    }
+
+    .btn-primary:hover {
+      transform: translateY(-1px);
+      box-shadow: var(--admin-shadow-lg);
+    }
+
+    .btn-secondary {
+      background: var(--admin-card);
+      color: var(--admin-text);
+      border: 1px solid var(--admin-border);
+      padding: 0.75rem 1.5rem;
+      border-radius: 0.5rem;
+      font-weight: 500;
+      transition: all 0.2s ease;
+    }
+
+    .btn-secondary:hover {
+      background: var(--admin-bg);
+      transform: translateY(-1px);
+    }
+
+    /* Professional Table Styles */
+    .admin-table {
+      background: var(--admin-card);
+      border-radius: 0.75rem;
+      overflow: hidden;
+      box-shadow: var(--admin-shadow);
+    }
+
+    .admin-table th {
+      background: var(--admin-bg);
+      color: var(--admin-text);
+      font-weight: 600;
+      padding: 1rem;
+      border-bottom: 1px solid var(--admin-border);
+    }
+
+    .admin-table td {
+      padding: 1rem;
+      border-bottom: 1px solid var(--admin-border);
+      color: var(--admin-text);
+    }
+
+    .admin-table tr:hover {
+      background: var(--admin-bg);
+    }
+
+    /* Professional Form Styles */
+    .admin-input {
+      background: var(--admin-card);
+      border: 1px solid var(--admin-border);
+      border-radius: 0.5rem;
+      padding: 0.75rem 1rem;
+      color: var(--admin-text);
+      transition: all 0.2s ease;
+    }
+
+    .admin-input:focus {
+      outline: none;
+      border-color: #667eea;
+      box-shadow: 0 0 0 3px rgba(102, 126, 234, 0.1);
+    }
+
+    .admin-select {
+      background: var(--admin-card);
+      border: 1px solid var(--admin-border);
+      border-radius: 0.5rem;
+      padding: 0.75rem 1rem;
+      color: var(--admin-text);
+      transition: all 0.2s ease;
+    }
+
+    .admin-select:focus {
+      outline: none;
+      border-color: #667eea;
+      box-shadow: 0 0 0 3px rgba(102, 126, 234, 0.1);
+    }
+
+    /* Professional Card Styles */
+    .admin-stats-card {
+      background: var(--admin-card);
+      border: 1px solid var(--admin-border);
+      border-radius: 1rem;
+      padding: 1.5rem;
+      box-shadow: var(--admin-shadow);
+      transition: all 0.3s ease;
+    }
+
+    .admin-stats-card:hover {
+      transform: translateY(-2px);
+      box-shadow: var(--admin-shadow-lg);
+    }
+
+    /* Professional Sidebar Styles */
+    .admin-sidebar-item {
+      color: #94a3b8;
+      padding: 0.75rem 1rem;
+      border-radius: 0.5rem;
+      margin: 0.25rem 0;
+      transition: all 0.2s ease;
+      display: flex;
+      align-items: center;
+      gap: 0.75rem;
+    }
+
+    .admin-sidebar-item:hover {
+      background: var(--admin-sidebar-hover);
+      color: white;
+    }
+
+    .admin-sidebar-item.active {
+      background: var(--admin-gradient);
+      color: white;
+    }
+
+    /* Professional Modal Styles */
+    .admin-modal {
+      background: var(--admin-card);
+      border-radius: 1rem;
+      box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.25);
+      border: 1px solid var(--admin-border);
+    }
+
+    .admin-modal-overlay {
+      background: rgba(0, 0, 0, 0.5);
+      backdrop-filter: blur(4px);
+    }
+
+    /* Professional Badge Styles */
+    .admin-badge {
+      padding: 0.25rem 0.75rem;
+      border-radius: 9999px;
+      font-size: 0.75rem;
+      font-weight: 500;
+      display: inline-flex;
+      align-items: center;
+      gap: 0.25rem;
+    }
+
+    /* Professional Loading States */
+    .admin-skeleton {
+      background: linear-gradient(90deg, #f0f0f0 25%, #e0e0e0 50%, #f0f0f0 75%);
+      background-size: 200% 100%;
+      animation: loading 1.5s infinite;
+    }
+
+    @keyframes loading {
+      0% {
+        background-position: 200% 0;
+      }
+      100% {
+        background-position: -200% 0;
+      }
+    }
+
+    /* Professional Animations */
+    .fade-in {
+      animation: fadeIn 0.3s ease-in-out;
+    }
+
+    @keyframes fadeIn {
+      from {
+        opacity: 0;
+        transform: translateY(10px);
+      }
+      to {
+        opacity: 1;
+        transform: translateY(0);
+      }
+    }
+
+    .slide-in {
+      animation: slideIn 0.3s ease-out;
+    }
+
+    @keyframes slideIn {
+      from {
+        opacity: 0;
+        transform: translateX(-20px);
+      }
+      to {
+        opacity: 1;
+        transform: translateX(0);
+      }
     }
