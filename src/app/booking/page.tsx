@@ -3,7 +3,7 @@
 import { useState, useEffect, Suspense } from 'react'
 import { useSearchParams } from 'next/navigation'
 import { CalendarDaysIcon, UsersIcon, MapPinIcon, ClockIcon } from '@heroicons/react/24/outline'
-import { tours } from '@/data/tours'
+// import { tours } from '@/data/tours' // Removed static import
 import { Tour, Booking } from '@/types'
 import { formatPrice, formatDate } from '@/lib/utils'
 import BookingForm from '@/components/forms/BookingForm'
@@ -13,20 +13,35 @@ function BookingPageContent() {
   const tourId = searchParams.get('tour')
   const [selectedTour, setSelectedTour] = useState<Tour | null>(null)
   const [bookingData, setBookingData] = useState<Partial<Booking>>({})
+  const [loading, setLoading] = useState(false)
 
   useEffect(() => {
-    if (tourId) {
-      const tour = tours.find(t => t.id === tourId)
-      if (tour) {
-        setSelectedTour(tour)
-        setBookingData({
-          tourId: tour.id,
-          tour: tour,
-          numberOfPeople: 1,
-          totalPrice: tour.price
-        })
+    const fetchTour = async () => {
+      if (tourId) {
+        try {
+          setLoading(true)
+          const response = await fetch(`/api/tours/${tourId}`)
+          const result = await response.json()
+          
+          if (result.success && result.data) {
+            const tour = result.data
+            setSelectedTour(tour)
+            setBookingData({
+              tourId: tour.id,
+              tour: tour,
+              numberOfPeople: 1,
+              totalPrice: tour.price
+            })
+          }
+        } catch (error) {
+          console.error('Error fetching tour:', error)
+        } finally {
+          setLoading(false)
+        }
       }
     }
+
+    fetchTour()
   }, [tourId])
 
   const handleBookingSubmit = (formData: any) => {
@@ -34,6 +49,17 @@ function BookingPageContent() {
     console.log('Booking submitted:', formData)
     // For now, we'll just show a success message
     alert('আপনার বুকিং সফলভাবে জমা দেওয়া হয়েছে! আমরা শীঘ্রই আপনার সাথে যোগাযোগ করব।')
+  }
+
+  if (loading) {
+    return (
+      <div className="min-h-screen bg-gray-50 flex items-center justify-center">
+        <div className="text-center">
+          <div className="animate-spin rounded-full h-12 w-12 border-b-2 border-blue-600 mx-auto mb-4"></div>
+          <p className="text-gray-600">ট্যুর লোড হচ্ছে...</p>
+        </div>
+      </div>
+    )
   }
 
   if (!selectedTour) {
