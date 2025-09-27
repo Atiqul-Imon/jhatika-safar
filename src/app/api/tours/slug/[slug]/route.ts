@@ -20,9 +20,17 @@ export async function GET(
       )
     }
     
+    // Transform MongoDB _id to id for frontend compatibility
+    const tourObj = JSON.parse(JSON.stringify(tour))
+    const transformedTour = {
+      ...tourObj,
+      id: (tour as any)._id.toString(),
+      _id: undefined
+    }
+
     return NextResponse.json({
       success: true,
-      data: tour
+      data: transformedTour
     })
     
   } catch (error) {

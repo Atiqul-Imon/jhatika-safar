@@ -43,9 +43,16 @@ export async function GET(request: NextRequest) {
     
     const totalPages = Math.ceil(totalCount / limit)
     
+    // Transform MongoDB _id to id for frontend compatibility
+    const transformedTours = tours.map(tour => ({
+      ...tour,
+      id: (tour as any)._id.toString(),
+      _id: undefined
+    }))
+
     const response = NextResponse.json({
       success: true,
-      data: tours,
+      data: transformedTours,
       pagination: {
         currentPage: page,
         totalPages,
