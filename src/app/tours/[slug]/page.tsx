@@ -119,10 +119,10 @@ export default async function TourDetailPage({ params }: TourDetailPageProps) {
                   অন্তর্ভুক্ত
                 </h3>
                 <ul className="space-y-2">
-                  {tour.includes.map((item: string, index: number) => (
+                  {tour.includes.split('\n').filter((item: string) => item.trim()).map((item: string, index: number) => (
                     <li key={index} className="flex items-start space-x-2">
                       <CheckIcon className="h-4 w-4 text-green-500 mt-1 flex-shrink-0" />
-                      <span className="text-gray-700 text-sm">{item}</span>
+                      <span className="text-gray-700 text-sm">{item.trim()}</span>
                     </li>
                   ))}
                 </ul>
@@ -134,10 +134,10 @@ export default async function TourDetailPage({ params }: TourDetailPageProps) {
                   অন্তর্ভুক্ত নয়
                 </h3>
                 <ul className="space-y-2">
-                  {tour.excludes.map((item: string, index: number) => (
+                  {tour.excludes.split('\n').filter((item: string) => item.trim()).map((item: string, index: number) => (
                     <li key={index} className="flex items-start space-x-2">
                       <XMarkIcon className="h-4 w-4 text-red-500 mt-1 flex-shrink-0" />
-                      <span className="text-gray-700 text-sm">{item}</span>
+                      <span className="text-gray-700 text-sm">{item.trim()}</span>
                     </li>
                   ))}
                 </ul>

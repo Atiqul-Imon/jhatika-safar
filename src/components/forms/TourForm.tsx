@@ -177,20 +177,20 @@ export default function TourForm({ tour, onSubmit, onCancel, loading = false }: 
     e.preventDefault()
     
     if (validateForm()) {
-      // Clean up empty array items
+      // Clean up empty array items and convert arrays to strings where needed
       const cleanedData = {
         ...formData,
         images: formData.images.filter(img => img.trim()),
         destinations: formData.destinations.filter(dest => dest.trim()),
         highlights: formData.highlights.filter(highlight => highlight.trim()),
-        season: formData.season.filter(s => s.trim()),
-        includes: formData.includes.filter(inc => inc.trim()),
-        excludes: formData.excludes.filter(exc => exc.trim()),
+        season: formData.season.filter(s => s.trim()).join(', '),
+        includes: formData.includes.filter(inc => inc.trim()).join('\n'),
+        excludes: formData.excludes.filter(exc => exc.trim()).join('\n'),
         itinerary: formData.itinerary.map((day, index) => ({
           ...day,
           day: index + 1,
           activities: day.activities.filter(act => act.trim()),
-          meals: day.meals.filter(meal => meal.trim())
+          meals: day.meals.filter(meal => meal.trim()).join(', ')
         }))
       }
 

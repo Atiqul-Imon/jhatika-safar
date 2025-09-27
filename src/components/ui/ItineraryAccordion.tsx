@@ -53,23 +53,12 @@ export default function ItineraryAccordion({ itinerary }: ItineraryAccordionProp
                 {/* Meals */}
                 <div>
                   <h4 className="font-medium text-gray-900 mb-2">খাবার:</h4>
-                  <ul className="space-y-1">
-                    {day.meals.map((meal, mealIndex) => (
-                      <li key={mealIndex} className="flex items-start space-x-2">
-                        <span className="w-2 h-2 bg-yellow-500 rounded-full mt-2 flex-shrink-0"></span>
-                        <span className="text-gray-700 text-sm">{meal}</span>
-                      </li>
-                    ))}
-                  </ul>
+                  <div className="flex items-start space-x-2">
+                    <span className="w-2 h-2 bg-yellow-500 rounded-full mt-2 flex-shrink-0"></span>
+                    <span className="text-gray-700 text-sm">{day.meals}</span>
+                  </div>
                 </div>
 
-                {/* Accommodation */}
-                {day.accommodation && (
-                  <div>
-                    <h4 className="font-medium text-gray-900 mb-2">আবাসন:</h4>
-                    <p className="text-gray-700 text-sm">{day.accommodation}</p>
-                  </div>
-                )}
               </div>
             </div>
           )}

@@ -47,7 +47,7 @@ export const featuredTours: Tour[] = [
     ],
     includes: 'Transportation from Khulna to Sundarbans\n2 nights accommodation\nAll meals\nBoat journey\nGuide service\nSundarbans entry fee',
     excludes: 'Personal expenses\nTips\nExtra meals',
-    difficulty: 'Medium',
+    difficulty: 'Moderate',
     groupSize: { min: 2, max: 12 },
     season: 'November, March',
     category: 'Nature',
@@ -236,5 +236,3 @@ export const featuredTours: Tour[] = [
     updatedAt: new Date()
   }
 ]
-
-export const tours: Tour[] = featuredTours // Alias for backward compatibility
