@@ -157,14 +157,31 @@ export default async function TourDetailPage({ params }: TourDetailPageProps) {
             </div>
 
             {/* Image Gallery */}
-            <TourGallery images={tour.images} title={tour.title} />
+            {tour.images && Array.isArray(tour.images) && tour.images.length > 0 ? (
+              <TourGallery images={tour.images} title={tour.title || 'Tour Images'} />
+            ) : (
+              <div className="bg-white rounded-2xl shadow-lg p-6">
+                <h2 className="text-2xl font-bold text-gray-900 mb-4">
+                  ছবির গ্যালারি
+                </h2>
+                <div className="text-gray-500 italic text-center py-8">
+                  No images available for this tour.
+                </div>
+              </div>
+            )}
 
             {/* Itinerary */}
             <div className="bg-white rounded-2xl shadow-lg p-6">
               <h2 className="text-2xl font-bold text-gray-900 mb-4">
                 ট্যুরের দিনপঞ্জি
               </h2>
-              <ItineraryAccordion itinerary={tour.itinerary} />
+              {tour.itinerary && Array.isArray(tour.itinerary) && tour.itinerary.length > 0 ? (
+                <ItineraryAccordion itinerary={tour.itinerary} />
+              ) : (
+                <div className="text-gray-500 italic text-center py-8">
+                  No itinerary information available for this tour.
+                </div>
+              )}
             </div>
 
             {/* Includes & Excludes */}
@@ -175,12 +192,25 @@ export default async function TourDetailPage({ params }: TourDetailPageProps) {
                   অন্তর্ভুক্ত
                 </h3>
                 <ul className="space-y-2">
-                  {tour.includes.split('\n').filter((item: string) => item.trim()).map((item: string, index: number) => (
-                    <li key={index} className="flex items-start space-x-2">
-                      <CheckIcon className="h-4 w-4 text-green-500 mt-1 flex-shrink-0" />
-                      <span className="text-gray-700 text-sm">{item.trim()}</span>
-                    </li>
-                  ))}
+                  {tour.includes ? (
+                    typeof tour.includes === 'string' ? (
+                      tour.includes.split('\n').filter((item: string) => item.trim()).map((item: string, index: number) => (
+                        <li key={index} className="flex items-start space-x-2">
+                          <CheckIcon className="h-4 w-4 text-green-500 mt-1 flex-shrink-0" />
+                          <span className="text-gray-700 text-sm">{item.trim()}</span>
+                        </li>
+                      ))
+                    ) : Array.isArray(tour.includes) ? (
+                      tour.includes.map((item: string, index: number) => (
+                        <li key={index} className="flex items-start space-x-2">
+                          <CheckIcon className="h-4 w-4 text-green-500 mt-1 flex-shrink-0" />
+                          <span className="text-gray-700 text-sm">{item}</span>
+                        </li>
+                      ))
+                    ) : null
+                  ) : (
+                    <li className="text-gray-500 italic text-sm">No includes information available</li>
+                  )}
                 </ul>
               </div>
 
@@ -190,12 +220,25 @@ export default async function TourDetailPage({ params }: TourDetailPageProps) {
                   অন্তর্ভুক্ত নয়
                 </h3>
                 <ul className="space-y-2">
-                  {tour.excludes.split('\n').filter((item: string) => item.trim()).map((item: string, index: number) => (
-                    <li key={index} className="flex items-start space-x-2">
-                      <XMarkIcon className="h-4 w-4 text-red-500 mt-1 flex-shrink-0" />
-                      <span className="text-gray-700 text-sm">{item.trim()}</span>
-                    </li>
-                  ))}
+                  {tour.excludes ? (
+                    typeof tour.excludes === 'string' ? (
+                      tour.excludes.split('\n').filter((item: string) => item.trim()).map((item: string, index: number) => (
+                        <li key={index} className="flex items-start space-x-2">
+                          <XMarkIcon className="h-4 w-4 text-red-500 mt-1 flex-shrink-0" />
+                          <span className="text-gray-700 text-sm">{item.trim()}</span>
+                        </li>
+                      ))
+                    ) : Array.isArray(tour.excludes) ? (
+                      tour.excludes.map((item: string, index: number) => (
+                        <li key={index} className="flex items-start space-x-2">
+                          <XMarkIcon className="h-4 w-4 text-red-500 mt-1 flex-shrink-0" />
+                          <span className="text-gray-700 text-sm">{item}</span>
+                        </li>
+                      ))
+                    ) : null
+                  ) : (
+                    <li className="text-gray-500 italic text-sm">No excludes information available</li>
+                  )}
                 </ul>
               </div>
             </div>
