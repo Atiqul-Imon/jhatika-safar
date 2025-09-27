@@ -3,7 +3,7 @@
 import { useState, useEffect, Suspense } from 'react'
 import { useSearchParams } from 'next/navigation'
 import { CalendarDaysIcon, UsersIcon, MapPinIcon, ClockIcon } from '@heroicons/react/24/outline'
-// import { tours } from '@/data/tours' // Removed static import
+// Static tour import removed - now using only API data
 import { Tour, Booking } from '@/types'
 import { formatPrice, formatDate } from '@/lib/utils'
 import BookingForm from '@/components/forms/BookingForm'
