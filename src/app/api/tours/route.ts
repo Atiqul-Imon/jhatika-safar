@@ -36,7 +36,7 @@ export async function GET(request: NextRequest) {
         limit, 
         skip 
       })
-      .select('title slug shortDescription duration price images destinations highlights category featured status createdAt')
+      .select('title slug shortDescription duration price images destinations highlights category featured status groupSize createdAt')
       .lean(),
       Tour.countDocuments(query)
     ])

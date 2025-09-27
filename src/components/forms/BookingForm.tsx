@@ -231,8 +231,8 @@ export default function BookingForm({ tour, onBookingSubmit, bookingData, setBoo
                 name="numberOfPeople"
                 value={formData.numberOfPeople}
                 onChange={handleInputChange}
-                min={tour.groupSize.min}
-                max={tour.groupSize.max}
+                min={tour.groupSize?.min || 1}
+                max={tour.groupSize?.max || 50}
                 className={`w-full pl-10 pr-3 py-2 border rounded-lg focus:ring-2 focus:ring-green-500 focus:border-transparent ${
                   errors.numberOfPeople ? 'border-red-500' : 'border-gray-300'
                 }`}

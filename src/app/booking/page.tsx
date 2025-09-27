@@ -110,7 +110,7 @@ function BookingPageContent() {
                     <div>
                       <div className="font-medium text-gray-900">দলের আকার</div>
                       <div className="text-sm text-gray-600">
-                        {selectedTour.groupSize.min}-{selectedTour.groupSize.max} জন
+                        {selectedTour.groupSize?.min || 1}-{selectedTour.groupSize?.max || 50} জন
                       </div>
                     </div>
                   </div>

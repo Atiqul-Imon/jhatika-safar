@@ -11,16 +11,17 @@ export interface Tour {
   destinations: string[]
   highlights: string[]
   itinerary: ItineraryDay[]
-  includes: string[]
-  excludes: string[]
-  difficulty: 'Easy' | 'Moderate' | 'Challenging'
+  includes: string
+  excludes: string
+  difficulty: 'Easy' | 'Medium' | 'Hard'
   groupSize: {
     min: number
     max: number
   }
-  season: string[]
-  category: 'Adventure' | 'Cultural' | 'Nature' | 'Religious' | 'Beach' | 'Historical'
+  season: string
+  category: string
   featured: boolean
+  status: 'active' | 'inactive' | 'draft'
   createdAt: Date
   updatedAt: Date
 }
@@ -30,8 +31,7 @@ export interface ItineraryDay {
   title: string
   description: string
   activities: string[]
-  meals: string[]
-  accommodation?: string
+  meals: string
 }
 
 export interface Booking {

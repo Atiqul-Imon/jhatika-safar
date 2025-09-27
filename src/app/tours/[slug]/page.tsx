@@ -196,7 +196,7 @@ export default async function TourDetailPage({ params }: TourDetailPageProps) {
                     <div>
                       <div className="font-medium text-gray-900">দলের আকার</div>
                       <div className="text-sm text-gray-600">
-                        {tour.groupSize.min}-{tour.groupSize.max} জন
+                        {tour.groupSize?.min || 1}-{tour.groupSize?.max || 50} জন
                       </div>
                     </div>
                   </div>
