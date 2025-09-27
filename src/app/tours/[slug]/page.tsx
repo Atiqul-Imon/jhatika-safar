@@ -1,4 +1,5 @@
 import { notFound } from 'next/navigation'
+import { Metadata } from 'next'
 import Image from 'next/image'
 import Link from 'next/link'
 import { 
@@ -25,21 +26,65 @@ export async function generateStaticParams() {
   return []
 }
 
+export async function generateMetadata({ params }: TourDetailPageProps): Promise<Metadata> {
+  const { slug } = await params
+  const tour = await getTourBySlug(slug)
+
+  if (!tour) {
+    return {
+      title: 'Tour Not Found',
+      description: 'The requested tour could not be found.',
+    }
+  }
+
+  return {
+    title: `${tour.title} | Jhatika Sofor Travel Agency`,
+    description: tour.shortDescription,
+    openGraph: {
+      title: tour.title,
+      description: tour.shortDescription,
+      images: tour.images.length > 0 ? [tour.images[0]] : [],
+    },
+    twitter: {
+      card: 'summary_large_image',
+      title: tour.title,
+      description: tour.shortDescription,
+      images: tour.images.length > 0 ? [tour.images[0]] : [],
+    },
+  }
+}
+
 async function getTourBySlug(slug: string) {
   try {
-    const response = await fetch(`${process.env.NEXT_PUBLIC_BASE_URL || 'http://localhost:3000'}/api/tours/slug/${slug}`, {
-      cache: 'no-store'
+    // Use internal API route for better performance and reliability
+    const baseUrl = process.env.VERCEL_URL 
+      ? `https://${process.env.VERCEL_URL}` 
+      : process.env.NEXT_PUBLIC_BASE_URL || 'http://localhost:3000'
+    
+    const response = await fetch(`${baseUrl}/api/tours/slug/${slug}`, {
+      cache: 'no-store',
+      headers: {
+        'Content-Type': 'application/json',
+      }
     })
+    
+    if (!response.ok) {
+      console.error(`Failed to fetch tour: ${response.status} ${response.statusText}`)
+      return null
+    }
+    
     const result = await response.json()
     
-    if (result.success) {
+    if (result.success && result.data) {
       return result.data
+    } else {
+      console.error('API returned unsuccessful response:', result)
+      return null
     }
   } catch (error) {
-    console.error('Error fetching tour:', error)
+    console.error('Error fetching tour by slug:', error)
+    return null
   }
-  
-  return null
 }
 
 export default async function TourDetailPage({ params }: TourDetailPageProps) {
@@ -54,19 +99,24 @@ export default async function TourDetailPage({ params }: TourDetailPageProps) {
     <div className="min-h-screen bg-white">
       {/* Hero Section */}
       <div className="relative h-96 overflow-hidden">
-        <Image
-          src={tour.images[0]}
-          alt={tour.title}
-          fill
-          className="object-cover"
-        />
+        {tour.images && tour.images.length > 0 ? (
+          <Image
+            src={tour.images[0]}
+            alt={tour.title || 'Tour Image'}
+            fill
+            className="object-cover"
+            priority
+          />
+        ) : (
+          <div className="w-full h-full bg-gradient-to-br from-green-400 to-blue-500" />
+        )}
         <div className="absolute inset-0 bg-gradient-to-t from-black/60 to-transparent" />
         <div className="absolute bottom-8 left-8 text-white">
           <h1 className="text-4xl md:text-5xl font-bold mb-2">
-            {tour.title}
+            {tour.title || 'Tour Package'}
           </h1>
           <p className="text-xl text-gray-200">
-            {tour.shortDescription}
+            {tour.shortDescription || tour.description || 'Amazing travel experience awaits you!'}
           </p>
         </div>
       </div>
@@ -91,12 +141,18 @@ export default async function TourDetailPage({ params }: TourDetailPageProps) {
                 ট্যুরের বিশেষত্ব
               </h2>
               <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-                {tour.highlights.map((highlight: string, index: number) => (
-                  <div key={index} className="flex items-start space-x-3">
-                    <CheckIcon className="h-5 w-5 text-green-500 mt-1 flex-shrink-0" />
-                    <span className="text-gray-700">{highlight}</span>
+                {tour.highlights && tour.highlights.length > 0 ? (
+                  tour.highlights.map((highlight: string, index: number) => (
+                    <div key={index} className="flex items-start space-x-3">
+                      <CheckIcon className="h-5 w-5 text-green-500 mt-1 flex-shrink-0" />
+                      <span className="text-gray-700">{highlight}</span>
+                    </div>
+                  ))
+                ) : (
+                  <div className="col-span-2 text-gray-500 italic">
+                    No highlights available for this tour.
                   </div>
-                ))}
+                )}
               </div>
             </div>
 
@@ -206,7 +262,9 @@ export default async function TourDetailPage({ params }: TourDetailPageProps) {
                     <div>
                       <div className="font-medium text-gray-900">গন্তব্য</div>
                       <div className="text-sm text-gray-600">
-                        {tour.destinations.join(', ')}
+                        {tour.destinations && tour.destinations.length > 0 
+                          ? tour.destinations.join(', ') 
+                          : 'Various destinations'}
                       </div>
                     </div>
                   </div>
@@ -224,7 +282,7 @@ export default async function TourDetailPage({ params }: TourDetailPageProps) {
                     <div>
                       <div className="font-medium text-gray-900">সেরা সময়</div>
                       <div className="text-sm text-gray-600">
-                        {tour.season.join(', ')}
+                        {tour.season}
                       </div>
                     </div>
                   </div>
