@@ -20,7 +20,8 @@ import AdminLayout from '@/components/admin/AdminLayout'
 import TourForm from '@/components/forms/TourForm'
 
 interface Tour {
-  _id: string
+  _id?: string
+  id?: string
   title: string
   description: string
   shortDescription: string
@@ -93,7 +94,7 @@ export default function ToursPage() {
   const handleTourSubmit = async (tourData: Partial<Tour>) => {
     try {
       setTourFormLoading(true)
-      const url = editingTour ? `/api/tours/${editingTour._id}` : '/api/tours'
+      const url = editingTour ? `/api/tours/${editingTour.id || editingTour._id}` : '/api/tours'
       const method = editingTour ? 'PUT' : 'POST'
 
       const response = await fetch(url, {
@@ -194,8 +195,8 @@ export default function ToursPage() {
 
   const filteredTours = tours.filter(tour => {
     const matchesSearch = tour.title.toLowerCase().includes(searchQuery.toLowerCase()) ||
-                         tour.destinations.some(dest => dest.toLowerCase().includes(searchQuery.toLowerCase())) ||
-                         tour.category.toLowerCase().includes(searchQuery.toLowerCase())
+                         (tour.destinations?.some(dest => dest.toLowerCase().includes(searchQuery.toLowerCase())) || false) ||
+                         (tour.category?.toLowerCase().includes(searchQuery.toLowerCase()) || false)
     
     const matchesStatus = statusFilter === 'all' || tour.status === statusFilter
     const matchesCategory = categoryFilter === 'all' || tour.category === categoryFilter
@@ -203,7 +204,7 @@ export default function ToursPage() {
     return matchesSearch && matchesStatus && matchesCategory
   })
 
-  const categories = [...new Set(tours.map(tour => tour.category))]
+  const categories = [...new Set(tours.map(tour => tour.category).filter(Boolean))]
 
   if (loading) {
     return (
@@ -344,11 +345,11 @@ export default function ToursPage() {
                   </div>
                   
                   <div className="text-sm text-gray-500 mb-3">
-                    <span className="font-medium">Destinations:</span> {tour.destinations.join(', ')}
+                    <span className="font-medium">Destinations:</span> {tour.destinations?.length ? tour.destinations.join(', ') : 'Not specified'}
                   </div>
                   
                   <div className="text-sm text-gray-500 mb-4">
-                    <span className="font-medium">Group Size:</span> {tour.groupSize.min}-{tour.groupSize.max} people
+                    <span className="font-medium">Group Size:</span> {tour.groupSize?.min && tour.groupSize?.max ? `${tour.groupSize.min}-${tour.groupSize.max} people` : 'Not specified'}
                   </div>
 
                   {/* Actions */}
@@ -369,7 +370,7 @@ export default function ToursPage() {
                         <PencilIcon className="h-4 w-4" />
                       </button>
                       <button
-                        onClick={() => deleteTour(tour._id)}
+                        onClick={() => deleteTour(tour.id || tour._id || '')}
                         className="text-red-600 hover:text-red-900 p-1"
                         title="Delete Tour"
                       >
@@ -378,7 +379,7 @@ export default function ToursPage() {
                     </div>
                     
                     <button
-                      onClick={() => toggleTourStatus(tour._id, tour.status)}
+                      onClick={() => toggleTourStatus(tour.id || tour._id || '', tour.status)}
                       className={`px-3 py-1 text-xs font-medium rounded-full transition-colors ${
                         tour.status === 'active'
                           ? 'bg-red-100 text-red-800 hover:bg-red-200'

@@ -50,24 +50,20 @@ const TourSchema = new Schema<ITour>({
   },
   description: {
     type: String,
-    required: [true, 'Tour description is required'],
     trim: true
   },
   shortDescription: {
     type: String,
-    required: [true, 'Short description is required'],
     trim: true,
     maxlength: [300, 'Short description cannot be more than 300 characters']
   },
   duration: {
     type: Number,
-    required: [true, 'Duration is required'],
     min: [1, 'Duration must be at least 1 day'],
     max: [30, 'Duration cannot be more than 30 days']
   },
   price: {
     type: Number,
-    required: [true, 'Price is required'],
     min: [0, 'Price cannot be negative']
   },
   originalPrice: {
@@ -75,81 +71,66 @@ const TourSchema = new Schema<ITour>({
     min: [0, 'Original price cannot be negative']
   },
   images: [{
-    type: String,
-    required: true
+    type: String
   }],
   destinations: [{
     type: String,
-    required: true,
     trim: true
   }],
   highlights: [{
     type: String,
-    required: true,
     trim: true
   }],
   itinerary: [{
     day: {
       type: Number,
-      required: true,
       min: 1
     },
     title: {
       type: String,
-      required: true,
       trim: true
     },
     description: {
       type: String,
-      required: true,
       trim: true
     },
     activities: [{
       type: String,
-      required: true,
       trim: true
     }],
     meals: {
       type: String,
-      required: true,
       trim: true
     }
   }],
   includes: {
     type: String,
-    required: [true, 'Includes information is required'],
     trim: true
   },
   excludes: {
     type: String,
-    required: [true, 'Excludes information is required'],
     trim: true
   },
   difficulty: {
     type: String,
-    enum: ['Easy', 'Medium', 'Hard'],
-    required: [true, 'Difficulty level is required']
+    enum: ['Easy', 'Medium', 'Hard']
   },
   groupSize: {
     min: {
       type: Number,
-      required: [true, 'Minimum group size is required'],
-      min: [1, 'Minimum group size must be at least 1']
+      min: [0, 'Minimum group size must be at least 0']
     },
     max: {
       type: Number,
-      required: [true, 'Maximum group size is required'],
-      min: [1, 'Maximum group size must be at least 1']
+      min: [0, 'Maximum group size must be at least 0']
     }
   },
   season: {
     type: String,
-    required: [true, 'Season information is required'],
     trim: true
   },
   category: {
     type: String,
-    required: [true, 'Category is required'],
     trim: true
   },
   featured: {

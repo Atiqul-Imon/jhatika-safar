@@ -31,7 +31,7 @@ export default function TourCard({
       {/* Image */}
       <div className={`relative overflow-hidden ${isCompact ? 'h-40' : isDetailed ? 'h-80' : 'h-64'}`}>
         <Image
-          src={tour.images[0]}
+          src={tour.images?.[0] || '/placeholder-tour.jpg'}
           alt={tour.title}
           fill
           className="object-cover transition-transform duration-300 hover:scale-110"
@@ -73,7 +73,7 @@ export default function TourCard({
         {/* Description */}
         {!isCompact && (
           <p className={`text-gray-700 mb-4 line-clamp-2 font-medium ${isDetailed ? 'text-base' : 'text-sm'}`}>
-            {isDetailed ? tour.description : tour.shortDescription}
+            {isDetailed ? (tour.description || 'No description available') : (tour.shortDescription || 'No description available')}
           </p>
         )}
 
@@ -81,13 +81,13 @@ export default function TourCard({
         <div className={`space-y-2 ${isCompact ? 'mb-3' : 'mb-4'}`}>
           <div className="flex items-center text-sm text-gray-700">
             <MapPinIcon className="h-4 w-4 mr-2 text-green-500" />
-            <span className="font-medium">{tour.destinations.join(', ')}</span>
+            <span className="font-medium">{tour.destinations?.length ? tour.destinations.join(', ') : 'Destination not specified'}</span>
           </div>
           <div className="flex items-center text-sm text-gray-700">
             <ClockIcon className="h-4 w-4 mr-2 text-green-500" />
-            <span className="font-medium">{tour.duration} days</span>
+            <span className="font-medium">{tour.duration || 'N/A'} days</span>
           </div>
-          {!isCompact && (
+          {!isCompact && tour.groupSize?.min && tour.groupSize?.max && (
             <div className="flex items-center text-sm text-gray-700">
               <UsersIcon className="h-4 w-4 mr-2 text-green-500" />
               <span className="font-medium">{tour.groupSize.min}-{tour.groupSize.max} people</span>

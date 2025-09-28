@@ -85,15 +85,12 @@ export async function POST(request: NextRequest) {
     
     const body = await request.json()
     
-    // Validate required fields
-    const requiredFields = ['title', 'description', 'shortDescription', 'duration', 'price', 'destinations', 'highlights', 'category']
-    for (const field of requiredFields) {
-      if (!body[field]) {
-        return NextResponse.json(
-          { success: false, message: `${field} is required` },
-          { status: 400 }
-        )
-      }
+    // Validate required fields - only title is required
+    if (!body.title) {
+      return NextResponse.json(
+        { success: false, message: 'Title is required' },
+        { status: 400 }
+      )
     }
     
     // Create slug from title
@@ -129,8 +126,9 @@ export async function POST(request: NextRequest) {
     
   } catch (error) {
     console.error('Error creating tour:', error)
+    console.error('Error details:', error.message)
     return NextResponse.json(
-      { success: false, message: 'Failed to create tour' },
+      { success: false, message: 'Failed to create tour', error: error.message },
       { status: 500 }
     )
   }
