@@ -2,6 +2,7 @@
 
 import { useState, useEffect } from 'react'
 import { XMarkIcon, PlusIcon, TrashIcon } from '@heroicons/react/24/outline'
+import ImageUpload from '@/components/ui/ImageUpload'
 
 interface TourFormProps {
   tour?: any
@@ -510,38 +511,12 @@ export default function TourForm({ tour, onSubmit, onCancel, loading = false }: 
 
           {/* Images */}
           <div className="space-y-4">
-            <div className="flex items-center justify-between">
-              <h3 className="text-lg font-semibold text-gray-900">Images</h3>
-              <button
-                type="button"
-                onClick={() => addArrayItem('images')}
-                className="flex items-center text-green-600 hover:text-green-700 text-sm"
-              >
-                <PlusIcon className="h-4 w-4 mr-1" />
-                Add Image
-              </button>
-            </div>
-            {formData.images.map((image, index) => (
-              <div key={index} className="flex items-center space-x-2">
-                <input
-                  type="url"
-                  value={image}
-                  onChange={(e) => handleArrayChange('images', index, e.target.value)}
-                  className="flex-1 px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-green-500 focus:border-transparent"
-                  placeholder="Enter image URL"
-                />
-                <button
-                  type="button"
-                  onClick={() => removeArrayItem('images', index)}
-                  className="text-red-500 hover:text-red-700"
-                >
-                  <TrashIcon className="h-5 w-5" />
-                </button>
-              </div>
-            ))}
-            {formData.images.length === 0 && (
-              <p className="text-gray-500 text-sm">No images added yet. Click "Add Image" to add some.</p>
-            )}
+            <h3 className="text-lg font-semibold text-gray-900">Images</h3>
+            <ImageUpload
+              images={formData.images}
+              onImagesChange={(images) => setFormData(prev => ({ ...prev, images }))}
+              maxImages={10}
+            />
           </div>
 
           {/* Additional Information */}
