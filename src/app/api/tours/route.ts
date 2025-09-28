@@ -124,7 +124,7 @@ export async function POST(request: NextRequest) {
       data: tour
     }, { status: 201 })
     
-  } catch (error) {
+  } catch (error: any) {
     console.error('Error creating tour:', error)
     console.error('Error details:', error.message)
     return NextResponse.json(
