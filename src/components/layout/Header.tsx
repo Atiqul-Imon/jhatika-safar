@@ -3,8 +3,9 @@
 import { useState } from 'react'
 import Link from 'next/link'
 import { usePathname } from 'next/navigation'
-import { Bars3Icon, XMarkIcon, PhoneIcon, EnvelopeIcon } from '@heroicons/react/24/outline'
+import { Bars3Icon, XMarkIcon, PhoneIcon, EnvelopeIcon, Cog6ToothIcon } from '@heroicons/react/24/outline'
 import { cn } from '@/lib/utils'
+import { useAuth } from '@/contexts/AuthContext'
 
 const navigation = [
   { name: 'Home', href: '/' },
@@ -16,6 +17,7 @@ const navigation = [
 export default function Header() {
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false)
   const pathname = usePathname()
+  const { user, isAuthenticated } = useAuth()
 
   return (
     <header className="bg-white shadow-lg sticky top-0 z-50">
@@ -53,6 +55,17 @@ export default function Header() {
 
           {/* CTA Buttons */}
           <div className="hidden md:flex items-center space-x-4">
+            {/* Admin Panel Button - Only show for admin users */}
+            {isAuthenticated && user?.role === 'admin' && (
+              <Link
+                href="/admin"
+                className="flex items-center space-x-2 bg-purple-600 text-white px-4 py-2 rounded-lg hover:bg-purple-700 transition-all duration-200 font-medium"
+              >
+                <Cog6ToothIcon className="h-4 w-4" />
+                <span>Admin Panel</span>
+              </Link>
+            )}
+            
             <a
               href="tel:+8801717151636"
               className="flex items-center space-x-2 bg-green-600 text-white px-4 py-2 rounded-lg hover:bg-green-700 transition-all duration-200 font-medium"
@@ -62,7 +75,7 @@ export default function Header() {
             </a>
             <Link
               href="/booking"
-              className="bg-gradient-primary text-white px-6 py-2 rounded-lg hover:shadow-lg transition-all duration-200 font-medium"
+              className="bg-green-600 hover:bg-green-700 text-white px-6 py-2 rounded-lg hover:shadow-lg transition-all duration-200 font-medium"
             >
               Book Now
             </Link>
@@ -104,6 +117,18 @@ export default function Header() {
               </Link>
             ))}
             <div className="pt-4 space-y-2">
+              {/* Admin Panel Button - Only show for admin users */}
+              {isAuthenticated && user?.role === 'admin' && (
+                <Link
+                  href="/admin"
+                  className="flex items-center justify-center space-x-2 bg-purple-600 text-white px-3 py-2 rounded-lg font-medium"
+                  onClick={() => setMobileMenuOpen(false)}
+                >
+                  <Cog6ToothIcon className="h-4 w-4" />
+                  <span>Admin Panel</span>
+                </Link>
+              )}
+              
               <a
                 href="tel:+8801717151636"
                 className="flex items-center justify-center space-x-2 bg-green-600 text-white px-3 py-2 rounded-lg font-medium"
@@ -114,7 +139,7 @@ export default function Header() {
               </a>
               <Link
                 href="/booking"
-                className="bg-gradient-primary text-white block px-3 py-2 rounded-lg text-center font-medium"
+                className="bg-green-600 hover:bg-green-700 text-white block px-3 py-2 rounded-lg text-center font-medium"
                 onClick={() => setMobileMenuOpen(false)}
               >
                 Book Now
