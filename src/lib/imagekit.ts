@@ -1,9 +1,10 @@
 import ImageKit from 'imagekit'
 
+// Initialize ImageKit with fallback values for build time
 const imagekit = new ImageKit({
-  publicKey: process.env.IMAGEKIT_PUBLIC_KEY!,
-  privateKey: process.env.IMAGEKIT_PRIVATE_KEY!,
-  urlEndpoint: process.env.IMAGEKIT_URL_ENDPOINT!
+  publicKey: process.env.IMAGEKIT_PUBLIC_KEY || 'public_ZyHB3Ka9x2WiciE1FFoVlpTjk60=',
+  privateKey: process.env.IMAGEKIT_PRIVATE_KEY || 'private_suajtDe9wiY91EopFtf6Zbslu54=',
+  urlEndpoint: process.env.IMAGEKIT_URL_ENDPOINT || 'https://ik.imagekit.io/nntiarb8cp'
 })
 
 export default imagekit
