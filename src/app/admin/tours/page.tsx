@@ -234,7 +234,7 @@ export default function ToursPage() {
             
             <button
               onClick={handleCreateTour}
-              className="bg-gradient-primary text-white px-4 py-2 rounded-lg hover:shadow-lg transition-all duration-200 flex items-center"
+              className="bg-green-600 hover:bg-green-700 text-white px-4 py-2 rounded-lg hover:shadow-lg transition-all duration-200 flex items-center"
             >
               <PlusIcon className="h-5 w-5 mr-2" />
               Add New Tour
@@ -401,7 +401,7 @@ export default function ToursPage() {
               <p className="text-gray-500 mb-4">Try adjusting your search or filter criteria.</p>
               <button
                 onClick={handleCreateTour}
-                className="bg-gradient-primary text-white px-4 py-2 rounded-lg hover:shadow-lg transition-all duration-200 flex items-center mx-auto"
+                className="bg-green-600 hover:bg-green-700 text-white px-4 py-2 rounded-lg hover:shadow-lg transition-all duration-200 flex items-center mx-auto"
               >
                 <PlusIcon className="h-5 w-5 mr-2" />
                 Add Your First Tour
