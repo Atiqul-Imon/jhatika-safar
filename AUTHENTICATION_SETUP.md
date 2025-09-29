@@ -1,7 +1,7 @@
 # Authentication System Setup Guide
 
 ## Overview
-This guide will help you set up the authentication system for the Jhatika Sofor travel agency website. The system includes:
+This guide will help you set up the authentication system for the Jhatika Safar travel agency website. The system includes:
 
 - **JWT-based authentication** with localStorage
 - **Protected admin routes** with role-based access

@@ -43,7 +43,7 @@ interface SettingsData {
 export default function SettingsPage() {
   const [settings, setSettings] = useState<SettingsData>({
     general: {
-      siteName: 'Jhatika Sofor',
+      siteName: 'Jhatika Safar',
       siteDescription: 'Your trusted travel partner in Bangladesh',
       contactEmail: 'info@jhatikasofor.com',
       contactPhone: '+880 1234 567890',

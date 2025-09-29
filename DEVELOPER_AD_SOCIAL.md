@@ -12,7 +12,7 @@ We specialize in creating modern, scalable web applications that drive growth. F
 ✅ Database Integration
 ✅ Cloud Deployment
 
-**Featured Project**: Jhatika Sofor Travel Agency - Complete travel management system with admin panel and booking functionality.
+**Featured Project**: Jhatika Safar Travel Agency - Complete travel management system with admin panel and booking functionality.
 
 Ready to take your business online? Let's discuss your project!
 

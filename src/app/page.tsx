@@ -104,7 +104,7 @@ export default function Home() {
               </p>
             </div>
           ) : upcomingTours.length > 0 ? (
-            <TourCardGrid tours={upcomingTours} showUpcomingBadge={true} />
+            <TourCardGrid tours={upcomingTours} />
           ) : (
             <div className="text-center py-12">
               <CalendarDaysIcon className="mx-auto h-16 w-16 text-gray-400 mb-4" />

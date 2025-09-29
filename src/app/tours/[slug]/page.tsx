@@ -38,7 +38,7 @@ export async function generateMetadata({ params }: TourDetailPageProps): Promise
   }
 
   return {
-    title: `${tour.title} | Jhatika Sofor Travel Agency`,
+    title: `${tour.title} | Jhatika Safar Travel Agency`,
     description: tour.shortDescription,
     openGraph: {
       title: tour.title,

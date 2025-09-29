@@ -76,7 +76,7 @@ export default function AdminSidebar({ isOpen, onToggle }: AdminSidebarProps) {
                 <span className="text-white font-bold text-lg">J</span>
               </div>
               <div>
-                <h1 className="text-xl font-bold text-white font-serif">Jhatika Sofor</h1>
+                <h1 className="text-xl font-bold text-white font-serif">Jhatika Safar</h1>
                 <p className="text-sm text-gray-300">Admin Panel</p>
               </div>
             </div>

@@ -1,4 +1,4 @@
-# Jhatika Sofor Travel Agency
+# Jhatika Safar Travel Agency
 
 A modern, full-stack travel agency website built with Next.js 15, featuring tour management, booking system, and admin panel.
 
@@ -264,4 +264,4 @@ For support and questions:
 
 ---
 
-**Made with ❤️ for Jhatika Sofor Travel Agency**
+**Made with ❤️ for Jhatika Safar Travel Agency**

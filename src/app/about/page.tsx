@@ -41,7 +41,7 @@ export default function AboutPage() {
             About Us
           </h1>
           <p className="text-xl md:text-2xl text-green-100 max-w-4xl mx-auto leading-relaxed">
-            Jhatika Sofor - Bangladesh&apos;s Most Trusted Travel Agency
+            Jhatika Safar - Bangladesh&apos;s Most Trusted Travel Agency
           </p>
         </div>
       </div>
@@ -56,7 +56,7 @@ export default function AboutPage() {
               </h2>
               <div className="space-y-4 text-gray-600 leading-relaxed">
                 <p>
-                  Established in 2015, Jhatika Sofor is a leading travel agency in Bangladesh.
+                  Established in 2015, Jhatika Safar is a leading travel agency in Bangladesh.
                   Our goal is to take travelers to the most beautiful places in Bangladesh
                   and provide them with memorable experiences.
                 </p>
@@ -75,7 +75,7 @@ export default function AboutPage() {
             <div className="relative">
               <img
                 src="https://res.cloudinary.com/db5yniogx/image/upload/v1/about/about-story.jpg"
-                alt="Jhatika Sofor Story"
+                alt="Jhatika Safar Story"
                 className="rounded-3xl shadow-xl w-full h-96 object-cover"
               />
             </div>

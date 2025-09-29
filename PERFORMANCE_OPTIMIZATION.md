@@ -1,7 +1,7 @@
 # Performance Optimization Guide
 
 ## Overview
-This document outlines the performance optimizations implemented to improve API response times and reduce database hits for the Jhatika Sofor travel agency website.
+This document outlines the performance optimizations implemented to improve API response times and reduce database hits for the Jhatika Safar travel agency website.
 
 ## 🚀 Optimizations Implemented
 

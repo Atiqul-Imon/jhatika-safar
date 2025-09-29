@@ -7,7 +7,6 @@ interface TourCardGridProps {
   showButtons?: boolean
   className?: string
   gridCols?: '1' | '2' | '3' | '4'
-  showUpcomingBadge?: boolean
 }
 
 export default function TourCardGrid({ 
@@ -15,8 +14,7 @@ export default function TourCardGrid({
   variant = 'default',
   showButtons = true,
   className = '',
-  gridCols = '3',
-  showUpcomingBadge = false
+  gridCols = '3'
 }: TourCardGridProps) {
   const getGridCols = () => {
     switch (gridCols) {
@@ -55,7 +53,6 @@ export default function TourCardGrid({
           tour={tour}
           variant={variant}
           showButtons={showButtons}
-          showUpcomingBadge={showUpcomingBadge}
         />
       ))}
     </div>

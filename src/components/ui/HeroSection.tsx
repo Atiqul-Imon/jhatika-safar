@@ -69,7 +69,7 @@ export default function HeroSection() {
             <span className="text-red-800">Beautiful Places</span>
           </h1>
           <p className="text-base sm:text-lg md:text-xl lg:text-2xl text-white mb-4 sm:mb-6 md:mb-8 max-w-2xl sm:max-w-3xl mx-auto px-2 sm:px-4 font-sans leading-relaxed">
-            Travel with Jhatika Sofor and create unforgettable memories
+            Travel with Jhatika Safar and create unforgettable memories
           </p>
 
           {/* Search Form */}

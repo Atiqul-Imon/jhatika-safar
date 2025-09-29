@@ -17,12 +17,12 @@ const playfair = Playfair_Display({
 });
 
 export const metadata: Metadata = {
-  title: "Jhatika Sofor - Bangladesh's Premier Travel Agency",
+  title: "Jhatika Safar - Bangladesh's Premier Travel Agency",
   description: "Discover the most beautiful places in Bangladesh. Premium tour packages to Sundarbans, Cox's Bazar, Sylhet and other destinations across the country.",
   keywords: "Bangladesh travel, travel agency, Sundarbans, Cox's Bazar, Sylhet, tour packages",
-  authors: [{ name: "Jhatika Sofor" }],
+  authors: [{ name: "Jhatika Safar" }],
   openGraph: {
-    title: "Jhatika Sofor - Bangladesh's Premier Travel Agency",
+    title: "Jhatika Safar - Bangladesh's Premier Travel Agency",
     description: "Discover the most beautiful places in Bangladesh",
     type: "website",
     locale: "en_US",

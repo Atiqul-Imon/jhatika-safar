@@ -1,6 +1,6 @@
-# 🚀 Vercel Deployment Guide for Jhatika Sofor
+# 🚀 Vercel Deployment Guide for Jhatika Safar
 
-This guide will help you deploy the Jhatika Sofor travel agency website to Vercel.
+This guide will help you deploy the Jhatika Safar travel agency website to Vercel.
 
 ## 📋 Prerequisites
 
@@ -206,7 +206,7 @@ Vercel automatically provides SSL certificates for all domains.
 
 ## 🎉 Success!
 
-Your Jhatika Sofor travel agency website is now live on Vercel! 
+Your Jhatika Safar travel agency website is now live on Vercel! 
 
 **Next Steps:**
 1. Test all functionality

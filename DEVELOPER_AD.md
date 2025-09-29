@@ -30,9 +30,9 @@
 
 ---
 
-## 🌟 **Featured Project: Jhatika Sofor Travel Agency**
+## 🌟 **Featured Project: Jhatika Safar Travel Agency**
 
-**Experience our work in action!** The Jhatika Sofor Travel Agency website showcases our full-stack development capabilities:
+**Experience our work in action!** The Jhatika Safar Travel Agency website showcases our full-stack development capabilities:
 
 ### **What We Built:**
 - 🏗️ **Complete Travel Management System** with admin panel
@@ -143,7 +143,7 @@
 
 > *"PixelForge BD delivered an exceptional travel agency website that exceeded our expectations. Their attention to detail and modern approach made our business stand out online."*
 > 
-> **- Jhatika Sofor Travel Agency**
+> **- Jhatika Safar Travel Agency**
 
 ---
 

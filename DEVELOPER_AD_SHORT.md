@@ -10,7 +10,7 @@
 - 📱 **Mobile-First Design** - Responsive across all devices
 
 ### 🌟 **Featured Work:**
-**Jhatika Sofor Travel Agency** - Complete travel management system with admin panel, booking system, and modern UI.
+**Jhatika Safar Travel Agency** - Complete travel management system with admin panel, booking system, and modern UI.
 
 ### 🎯 **Perfect For:**
 - Small & Medium Businesses

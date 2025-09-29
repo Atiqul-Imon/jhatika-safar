@@ -1,6 +1,6 @@
 'use client'
 
-import { useState, useEffect } from 'react'
+import { useState, useEffect, Suspense } from 'react'
 import { useSearchParams } from 'next/navigation'
 import { MagnifyingGlassIcon, FunnelIcon } from '@heroicons/react/24/outline'
 import { Tour } from '@/types'
@@ -9,7 +9,7 @@ import TourCardGrid from '@/components/ui/TourCardGrid'
 const categories = ['All', 'Adventure', 'Cultural', 'Nature', 'Religious', 'Beach', 'Historical']
 const difficulties = ['All', 'Easy', 'Moderate', 'Challenging']
 
-export default function ToursPage() {
+function ToursPageContent() {
   const searchParams = useSearchParams()
   const [tours, setTours] = useState<Tour[]>([])
   const [loading, setLoading] = useState(true)
@@ -232,5 +232,20 @@ export default function ToursPage() {
         )}
       </div>
     </div>
+  )
+}
+
+export default function ToursPage() {
+  return (
+    <Suspense fallback={
+      <div className="min-h-screen bg-gradient-to-br from-green-50 via-white to-green-100 flex items-center justify-center">
+        <div className="text-center">
+          <div className="animate-spin rounded-full h-12 w-12 border-b-2 border-green-600 mx-auto mb-4"></div>
+          <p className="text-gray-600">Loading tours...</p>
+        </div>
+      </div>
+    }>
+      <ToursPageContent />
+    </Suspense>
   )
 }

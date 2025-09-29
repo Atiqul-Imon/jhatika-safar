@@ -1,6 +1,6 @@
 # Deployment Guide
 
-This guide will help you deploy the Jhatika Sofor Travel Agency website to various platforms.
+This guide will help you deploy the Jhatika Safar Travel Agency website to various platforms.
 
 ## 🚀 Vercel Deployment (Recommended)
 

@@ -31,7 +31,7 @@ export default function Header() {
                 <span className="text-white font-bold text-xl">J</span>
               </div>
               <div>
-                <h1 className="text-2xl font-bold text-gray-900 font-serif">Jhatika Sofor</h1>
+                <h1 className="text-2xl font-bold text-gray-900 font-serif">Jhatika Safar</h1>
                 <p className="text-sm text-gray-700 font-medium">Bangladesh Travel</p>
               </div>
             </Link>

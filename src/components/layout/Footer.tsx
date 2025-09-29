@@ -75,7 +75,7 @@ export default function Footer() {
                 <span className="text-white font-bold text-lg">J</span>
               </div>
               <div>
-                <h3 className="text-lg font-bold font-serif">Jhatika Sofor</h3>
+                <h3 className="text-lg font-bold font-serif">Jhatika Safar</h3>
                 <p className="text-sm text-gray-300 font-medium">Bangladesh Travel</p>
               </div>
             </div>
@@ -160,7 +160,7 @@ export default function Footer() {
         <div className="border-t border-gray-800 mt-8 pt-8">
           <div className="flex flex-col md:flex-row justify-between items-center">
             <div className="text-gray-300 text-sm font-medium">
-              © {new Date().getFullYear()} Jhatika Sofor. All rights reserved.
+              © {new Date().getFullYear()} Jhatika Safar. All rights reserved.
             </div>
             <div className="flex space-x-6 mt-4 md:mt-0">
               {navigation.support.map((item) => (

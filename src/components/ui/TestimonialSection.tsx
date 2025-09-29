@@ -6,7 +6,7 @@ export default function TestimonialSection() {
       name: 'Rahima Khatun',
       location: 'Dhaka',
       rating: 5,
-      text: 'The Sundarbans tour with Jhatika Sofor was amazing. Our guide was very experienced and managed everything beautifully.',
+      text: 'The Sundarbans tour with Jhatika Safar was amazing. Our guide was very experienced and managed everything beautifully.',
       tour: 'Sundarbans Tour'
     },
     {
