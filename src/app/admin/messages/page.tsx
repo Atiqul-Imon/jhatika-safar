@@ -19,7 +19,7 @@ import AdminLayout from '@/components/admin/AdminLayout'
 interface ContactMessage {
   _id: string
   name: string
-  email: string
+  email?: string
   phone: string
   subject: string
   message: string
@@ -117,7 +117,7 @@ export default function MessagesPage() {
 
   const filteredMessages = messages.filter(message => {
     const matchesSearch = message.name.toLowerCase().includes(searchQuery.toLowerCase()) ||
-                         message.email.toLowerCase().includes(searchQuery.toLowerCase()) ||
+                         (message.email && message.email.toLowerCase().includes(searchQuery.toLowerCase())) ||
                          message.subject.toLowerCase().includes(searchQuery.toLowerCase()) ||
                          message.message.toLowerCase().includes(searchQuery.toLowerCase())
     
@@ -223,7 +223,8 @@ export default function MessagesPage() {
                       )}
                     </div>
                     <p className="text-sm text-gray-600">
-                      From: <span className="font-medium">{message.name}</span> ({message.email}) • {message.phone}
+                      From: <span className="font-medium">{message.name}</span>
+                      {message.email && ` (${message.email})`} • {message.phone}
                     </p>
                   </div>
                   <div className="flex items-center space-x-2 ml-4">
@@ -299,7 +300,7 @@ export default function MessagesPage() {
                     </div>
                     <div>
                       <label className="block text-sm font-medium text-gray-700">Email</label>
-                      <p className="mt-1 text-sm text-gray-900">{selectedMessage.email}</p>
+                      <p className="mt-1 text-sm text-gray-900">{selectedMessage.email || 'Not provided'}</p>
                     </div>
                     <div>
                       <label className="block text-sm font-medium text-gray-700">Phone</label>
@@ -351,12 +352,14 @@ export default function MessagesPage() {
                   </div>
                   
                   <div className="flex space-x-3">
-                    <a
-                      href={`mailto:${selectedMessage.email}?subject=Re: ${selectedMessage.subject}`}
-                      className="px-4 py-2 bg-green-600 text-white rounded-lg hover:bg-green-700 text-sm"
-                    >
-                      Reply via Email
-                    </a>
+                    {selectedMessage.email && (
+                      <a
+                        href={`mailto:${selectedMessage.email}?subject=Re: ${selectedMessage.subject}`}
+                        className="px-4 py-2 bg-green-600 text-white rounded-lg hover:bg-green-700 text-sm"
+                      >
+                        Reply via Email
+                      </a>
+                    )}
                     <button
                       onClick={() => setShowDetails(false)}
                       className="px-4 py-2 border border-gray-300 rounded-lg text-gray-700 hover:bg-gray-50 text-sm"

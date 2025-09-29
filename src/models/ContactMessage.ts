@@ -20,10 +20,15 @@ const ContactMessageSchema = new Schema<IContactMessage>({
   },
   email: {
     type: String,
-    required: [true, 'Email is required'],
+    required: false,
     trim: true,
     lowercase: true,
-    match: [/^\w+([.-]?\w+)*@\w+([.-]?\w+)*(\.\w{2,3})+$/, 'Please enter a valid email']
+    validate: {
+      validator: function(v: string) {
+        return !v || /^\w+([.-]?\w+)*@\w+([.-]?\w+)*(\.\w{2,3})+$/.test(v)
+      },
+      message: 'Please enter a valid email'
+    }
   },
   phone: {
     type: String,

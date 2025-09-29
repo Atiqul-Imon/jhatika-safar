@@ -45,7 +45,7 @@ export async function POST(request: NextRequest) {
     const body = await request.json()
     
     // Validate required fields
-    const requiredFields = ['name', 'email', 'phone', 'subject', 'message']
+    const requiredFields = ['name', 'phone', 'subject', 'message']
     for (const field of requiredFields) {
       if (!body[field]) {
         return NextResponse.json(
@@ -55,19 +55,31 @@ export async function POST(request: NextRequest) {
       }
     }
     
-    // Validate email format
-    const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/
-    if (!emailRegex.test(body.email)) {
-      return NextResponse.json(
-        { success: false, message: 'Invalid email format' },
-        { status: 400 }
-      )
+    // Validate email format if provided
+    if (body.email) {
+      const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/
+      if (!emailRegex.test(body.email)) {
+        return NextResponse.json(
+          { success: false, message: 'Invalid email format' },
+          { status: 400 }
+        )
+      }
     }
     
-    const message = new ContactMessage({
-      ...body,
+    // Only include email if it's provided and not empty
+    const messageData: any = {
+      name: body.name,
+      phone: body.phone,
+      subject: body.subject,
+      message: body.message,
       status: 'new'
-    })
+    }
+    
+    if (body.email && body.email.trim()) {
+      messageData.email = body.email
+    }
+    
+    const message = new ContactMessage(messageData)
     
     await message.save()
     
@@ -80,7 +92,7 @@ export async function POST(request: NextRequest) {
   } catch (error) {
     console.error('Error creating contact message:', error)
     return NextResponse.json(
-      { success: false, message: 'Failed to send contact message' },
+      { success: false, message: 'Failed to send contact message', error: error instanceof Error ? error.message : 'Unknown error' },
       { status: 500 }
     )
   }

@@ -37,9 +37,7 @@ export default function ContactPage() {
       newErrors.name = 'Name is required'
     }
 
-    if (!formData.email.trim()) {
-      newErrors.email = 'Email is required'
-    } else if (!/\S+@\S+\.\S+/.test(formData.email)) {
+    if (formData.email.trim() && !/\S+@\S+\.\S+/.test(formData.email)) {
       newErrors.email = 'Please enter a valid email'
     }
 
@@ -160,8 +158,8 @@ export default function ContactPage() {
                 <div>
                   <h3 className="text-lg font-semibold text-gray-900 mb-1">Email</h3>
                   <p className="text-gray-600">
-                    info@jhatikasofor.com<br />
-                    support@jhatikasofor.com
+                    info@jhatikasafar.com<br />
+                    support@jhatikasafar.com
                   </p>
                 </div>
               </div>
@@ -237,7 +235,7 @@ export default function ContactPage() {
 
                 <div>
                   <label htmlFor="email" className="block text-sm font-medium text-gray-700 mb-1">
-                    Email *
+                    Email (optional)
                   </label>
                   <input
                     type="email"
@@ -322,7 +320,7 @@ export default function ContactPage() {
 
               <button
                 type="submit"
-                className="w-full bg-gradient-to-r from-blue-500 to-blue-600 text-white py-3 px-6 rounded-lg hover:shadow-lg transition-all duration-200 font-medium hover:from-blue-600 hover:to-blue-700"
+                className="w-full bg-gradient-to-r from-green-600 to-green-700 text-white py-3 px-6 rounded-lg hover:shadow-lg transition-all duration-200 font-medium hover:from-green-700 hover:to-green-800"
               >
                 Send Message
               </button>
