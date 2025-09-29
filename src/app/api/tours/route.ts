@@ -11,6 +11,8 @@ export async function GET(request: NextRequest) {
     const status = searchParams.get('status')
     const category = searchParams.get('category')
     const featured = searchParams.get('featured')
+    const destination = searchParams.get('destination')
+    const date = searchParams.get('date')
     const limit = parseInt(searchParams.get('limit') || '20')
     const page = parseInt(searchParams.get('page') || '1')
     const sort = searchParams.get('sort') || 'createdAt'
@@ -21,6 +23,22 @@ export async function GET(request: NextRequest) {
     if (status) query.status = status
     if (category) query.category = category
     if (featured) query.featured = featured === 'true'
+    
+    // Add destination filtering
+    if (destination) {
+      query.destinations = { $in: [new RegExp(destination, 'i')] }
+    }
+    
+    // Add date filtering - check if tour has upcoming dates
+    if (date) {
+      const searchDate = new Date(date)
+      const startOfDay = new Date(searchDate.setHours(0, 0, 0, 0))
+      const endOfDay = new Date(searchDate.setHours(23, 59, 59, 999))
+      
+      // For now, we'll filter tours that are active and available
+      // In a real implementation, you might have tour schedules/dates
+      query.status = 'active'
+    }
     
     // Build sort options
     const sortOptions: any = {}

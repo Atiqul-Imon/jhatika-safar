@@ -1,26 +1,6 @@
 import { StarIcon, MapPinIcon, UsersIcon, ClockIcon } from '@heroicons/react/24/outline'
 
 export default function AboutPage() {
-  const team = [
-    {
-      name: 'Ahmed Hasan',
-      position: 'Chief Executive Officer',
-      image: 'https://res.cloudinary.com/db5yniogx/image/upload/v1/team/team-1.jpg',
-      description: 'Working in Bangladesh\'s tourism industry with 10 years of experience.'
-    },
-    {
-      name: 'Fatema Khatun',
-      position: 'Tour Director',
-      image: 'https://res.cloudinary.com/db5yniogx/image/upload/v1/team/team-2.jpg',
-      description: 'Working as an expert guide for Sundarbans and Cox\'s Bazar.'
-    },
-    {
-      name: 'Karim Uddin',
-      position: 'Customer Service Manager',
-      image: 'https://res.cloudinary.com/db5yniogx/image/upload/v1/team/team-3.jpg',
-      description: 'Always ready to ensure customer satisfaction.'
-    }
-  ]
 
   const values = [
     {
@@ -48,7 +28,7 @@ export default function AboutPage() {
   return (
     <div className="min-h-screen bg-gray-50">
       {/* Hero Section */}
-      <div className="bg-gradient-to-br from-slate-900 via-blue-900 to-slate-800 relative overflow-hidden">
+      <div className="bg-gradient-to-br from-green-600 via-green-700 to-green-800 relative overflow-hidden">
         {/* Professional Background Pattern */}
         <div className="absolute inset-0 opacity-10">
           <div className="absolute top-0 left-0 w-96 h-96 bg-blue-400 rounded-full mix-blend-multiply filter blur-3xl"></div>
@@ -60,7 +40,7 @@ export default function AboutPage() {
           <h1 className="text-4xl md:text-5xl lg:text-6xl font-bold mb-6 font-serif text-white">
             About Us
           </h1>
-          <p className="text-xl md:text-2xl text-blue-100 max-w-4xl mx-auto leading-relaxed">
+          <p className="text-xl md:text-2xl text-green-100 max-w-4xl mx-auto leading-relaxed">
             Jhatika Sofor - Bangladesh&apos;s Most Trusted Travel Agency
           </p>
         </div>
@@ -125,7 +105,7 @@ export default function AboutPage() {
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
             {values.map((value, index) => (
               <div key={index} className="text-center group">
-                <div className="w-20 h-20 bg-gradient-to-br from-blue-500 to-blue-600 rounded-2xl flex items-center justify-center mx-auto mb-6 group-hover:scale-110 transition-transform duration-300 shadow-lg">
+                <div className="w-20 h-20 bg-amber-400 rounded-2xl flex items-center justify-center mx-auto mb-6 group-hover:scale-110 transition-transform duration-300 shadow-lg">
                   <value.icon className="h-10 w-10 text-white" />
                 </div>
                 <h3 className="text-xl font-semibold text-gray-900 mb-3 font-serif">
@@ -140,45 +120,9 @@ export default function AboutPage() {
         </div>
       </section>
 
-      {/* Our Team */}
-      <section className="py-20 bg-white">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="text-center mb-16">
-            <h2 className="text-3xl md:text-4xl font-bold text-gray-900 mb-4 font-serif">
-              Our Team
-            </h2>
-            <p className="text-lg text-gray-600 max-w-2xl mx-auto">
-              Our experienced and skilled team
-            </p>
-          </div>
-
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
-            {team.map((member, index) => (
-              <div key={index} className="bg-white rounded-3xl shadow-xl overflow-hidden hover:shadow-2xl transition-all duration-300 transform hover:-translate-y-2 border border-gray-100">
-                <img
-                  src={member.image}
-                  alt={member.name}
-                  className="w-full h-64 object-cover"
-                />
-                <div className="p-8">
-                  <h3 className="text-xl font-bold text-gray-900 mb-1 font-serif">
-                    {member.name}
-                  </h3>
-                  <p className="text-blue-600 font-medium mb-3">
-                    {member.position}
-                  </p>
-                  <p className="text-gray-600 leading-relaxed">
-                    {member.description}
-                  </p>
-                </div>
-              </div>
-            ))}
-          </div>
-        </div>
-      </section>
 
       {/* Statistics */}
-      <section className="py-20 bg-gradient-to-br from-slate-900 via-blue-900 to-slate-800 relative overflow-hidden">
+      <section className="py-20 bg-gradient-to-br from-green-600 via-green-700 to-green-800 relative overflow-hidden">
         {/* Professional Background Pattern */}
         <div className="absolute inset-0 opacity-10">
           <div className="absolute top-0 left-0 w-96 h-96 bg-blue-400 rounded-full mix-blend-multiply filter blur-3xl"></div>
@@ -191,7 +135,7 @@ export default function AboutPage() {
             <h2 className="text-3xl md:text-4xl font-bold mb-4 font-serif text-white">
               Our Achievements
             </h2>
-            <p className="text-xl text-blue-100">
+            <p className="text-xl text-green-100">
               Years of providing the best travel services
             </p>
           </div>
@@ -199,29 +143,29 @@ export default function AboutPage() {
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
             <div className="text-center">
               <div className="text-4xl md:text-5xl font-bold mb-2 text-white">500+</div>
-              <div className="text-blue-100 mb-2">Successful Tours</div>
-              <p className="text-sm text-blue-200">
+              <div className="text-green-100 mb-2">Successful Tours</div>
+              <p className="text-sm text-green-200">
                 We have successfully conducted 500+ tours
               </p>
             </div>
             <div className="text-center">
               <div className="text-4xl md:text-5xl font-bold mb-2 text-white">1000+</div>
-              <div className="text-blue-100 mb-2">Happy Customers</div>
-              <p className="text-sm text-blue-200">
+              <div className="text-green-100 mb-2">Happy Customers</div>
+              <p className="text-sm text-green-200">
                 Our 1000+ customers are satisfied with our service
               </p>
             </div>
             <div className="text-center">
               <div className="text-4xl md:text-5xl font-bold mb-2 text-white">15+</div>
-              <div className="text-blue-100 mb-2">Destinations</div>
-              <p className="text-sm text-blue-200">
+              <div className="text-green-100 mb-2">Destinations</div>
+              <p className="text-sm text-green-200">
                 Tours to 15+ beautiful places in Bangladesh
               </p>
             </div>
             <div className="text-center">
               <div className="text-4xl md:text-5xl font-bold mb-2 text-white">98%</div>
-              <div className="text-blue-100 mb-2">Satisfaction Rate</div>
-              <p className="text-sm text-blue-200">
+              <div className="text-green-100 mb-2">Satisfaction Rate</div>
+              <p className="text-sm text-green-200">
                 98% satisfaction rate among our customers
               </p>
             </div>

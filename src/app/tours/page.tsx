@@ -1,6 +1,7 @@
 'use client'
 
 import { useState, useEffect } from 'react'
+import { useSearchParams } from 'next/navigation'
 import { MagnifyingGlassIcon, FunnelIcon } from '@heroicons/react/24/outline'
 import { Tour } from '@/types'
 import TourCardGrid from '@/components/ui/TourCardGrid'
@@ -9,6 +10,7 @@ const categories = ['All', 'Adventure', 'Cultural', 'Nature', 'Religious', 'Beac
 const difficulties = ['All', 'Easy', 'Moderate', 'Challenging']
 
 export default function ToursPage() {
+  const searchParams = useSearchParams()
   const [tours, setTours] = useState<Tour[]>([])
   const [loading, setLoading] = useState(true)
   const [searchQuery, setSearchQuery] = useState('')
@@ -16,14 +18,28 @@ export default function ToursPage() {
   const [selectedDifficulty, setSelectedDifficulty] = useState('All')
   const [priceRange, setPriceRange] = useState([0, 50000])
   const [showFilters, setShowFilters] = useState(false)
+  
+  // Get search parameters from URL
+  const destination = searchParams.get('destination')
+  const date = searchParams.get('date')
+  const status = searchParams.get('status')
 
   // Fetch tours from API with pagination
   useEffect(() => {
     const fetchTours = async () => {
       try {
         setLoading(true)
-        // Optimized: Fetch with pagination and caching
-        const response = await fetch('/api/tours?status=active&limit=50', {
+        
+        // Build API URL with search parameters
+        const apiParams = new URLSearchParams({
+          status: status || 'active',
+          limit: '50'
+        })
+        
+        if (destination) apiParams.append('destination', destination)
+        if (date) apiParams.append('date', date)
+        
+        const response = await fetch(`/api/tours?${apiParams.toString()}`, {
           headers: {
             'Cache-Control': 'max-age=600' // Client-side caching for 10 minutes
           }
@@ -43,7 +59,7 @@ export default function ToursPage() {
     }
 
     fetchTours()
-  }, [])
+  }, [destination, date, status])
 
   // Filter tours based on search and filters
   const filteredTours = tours.filter((tour: Tour) => {
@@ -87,6 +103,30 @@ export default function ToursPage() {
       </div>
 
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
+        {/* Search Results Header */}
+        {(destination || date) && (
+          <div className="mb-6 p-4 bg-green-50 border border-green-200 rounded-lg">
+            <h2 className="text-lg font-semibold text-gray-900 mb-2">Search Results</h2>
+            <div className="flex flex-wrap gap-4 text-sm text-gray-600">
+              {destination && (
+                <span className="flex items-center">
+                  <span className="font-medium">Destination:</span>
+                  <span className="ml-1 px-2 py-1 bg-green-100 text-green-800 rounded-full">{destination}</span>
+                </span>
+              )}
+              {date && (
+                <span className="flex items-center">
+                  <span className="font-medium">Date:</span>
+                  <span className="ml-1 px-2 py-1 bg-green-100 text-green-800 rounded-full">{new Date(date).toLocaleDateString()}</span>
+                </span>
+              )}
+            </div>
+            <p className="text-sm text-gray-500 mt-2">
+              Found {tours.length} tour{tours.length !== 1 ? 's' : ''} matching your search
+            </p>
+          </div>
+        )}
+        
         {/* Search and Filters */}
         <div className="bg-white/90 backdrop-blur-sm rounded-2xl shadow-xl border border-green-100 p-6 mb-8">
           {/* Search Bar */}

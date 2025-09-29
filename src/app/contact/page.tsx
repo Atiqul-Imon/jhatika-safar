@@ -96,7 +96,7 @@ export default function ContactPage() {
   return (
     <div className="min-h-screen bg-gray-50">
       {/* Header */}
-      <div className="bg-gradient-to-br from-slate-900 via-blue-900 to-slate-800 relative overflow-hidden">
+      <div className="bg-gradient-to-br from-green-600 via-green-700 to-green-800 relative overflow-hidden">
         {/* Professional Background Pattern */}
         <div className="absolute inset-0 opacity-10">
           <div className="absolute top-0 left-0 w-96 h-96 bg-blue-400 rounded-full mix-blend-multiply filter blur-3xl"></div>
@@ -108,7 +108,7 @@ export default function ContactPage() {
           <h1 className="text-4xl md:text-5xl lg:text-6xl font-bold mb-6 font-serif text-white">
             Contact Us
           </h1>
-          <p className="text-xl md:text-2xl text-blue-100 max-w-3xl mx-auto leading-relaxed">
+          <p className="text-xl md:text-2xl text-green-100 max-w-3xl mx-auto leading-relaxed">
             Get in touch with us for any questions or inquiries
           </p>
         </div>

@@ -67,38 +67,31 @@ export default function BookingForm({ tour, onBookingSubmit, bookingData, setBoo
     const newErrors: Record<string, string> = {}
 
     if (!formData.customerName.trim()) {
-      newErrors.customerName = 'নাম প্রয়োজন'
-    }
-
-    if (!formData.customerEmail.trim()) {
-      newErrors.customerEmail = 'ইমেইল প্রয়োজন'
-    } else if (!/\S+@\S+\.\S+/.test(formData.customerEmail)) {
-      newErrors.customerEmail = 'বৈধ ইমেইল দিন'
+      newErrors.customerName = 'Name is required'
     }
 
     if (!formData.customerPhone.trim()) {
-      newErrors.customerPhone = 'ফোন নম্বর প্রয়োজন'
+      newErrors.customerPhone = 'Phone number is required'
     } else if (!/^(\+880|880|0)?1[3-9]\d{8}$/.test(formData.customerPhone.replace(/\s/g, ''))) {
-      newErrors.customerPhone = 'বৈধ বাংলাদেশী ফোন নম্বর দিন (যেমন: 01712345678, +8801712345678)'
+      newErrors.customerPhone = 'Please enter a valid Bangladeshi phone number (e.g., 01712345678, +8801712345678)'
     }
 
-    if (!formData.customerAddress.trim()) {
-      newErrors.customerAddress = 'ঠিকানা প্রয়োজন'
+    if (formData.numberOfPeople < (tour.groupSize?.min || 1) || formData.numberOfPeople > (tour.groupSize?.max || 50)) {
+      newErrors.numberOfPeople = `Must be between ${tour.groupSize?.min || 1}-${tour.groupSize?.max || 50} people`
     }
 
-    if (!formData.startDate) {
-      newErrors.startDate = 'শুরুর তারিখ প্রয়োজন'
-    } else {
+    // Optional field validations
+    if (formData.customerEmail && !/\S+@\S+\.\S+/.test(formData.customerEmail)) {
+      newErrors.customerEmail = 'Please enter a valid email'
+    }
+
+    if (formData.startDate) {
       const startDate = new Date(formData.startDate)
       const today = new Date()
       today.setHours(0, 0, 0, 0)
       if (startDate < today) {
-        newErrors.startDate = 'শুরুর তারিখ আজকের তারিখের পর হতে হবে'
+        newErrors.startDate = 'Start date must be after today'
       }
-    }
-
-    if (formData.numberOfPeople < tour.groupSize.min || formData.numberOfPeople > tour.groupSize.max) {
-      newErrors.numberOfPeople = `${tour.groupSize.min}-${tour.groupSize.max} জনের মধ্যে হতে হবে`
     }
 
     setErrors(newErrors)
@@ -118,13 +111,13 @@ export default function BookingForm({ tour, onBookingSubmit, bookingData, setBoo
           },
           body: JSON.stringify({
             customerName: formData.customerName,
-            customerEmail: formData.customerEmail,
+            customerEmail: formData.customerEmail || undefined,
             customerPhone: formData.customerPhone,
-            customerAddress: formData.customerAddress,
+            customerAddress: formData.customerAddress || undefined,
             tourId: tour.id,
             numberOfPeople: formData.numberOfPeople,
-            startDate: formData.startDate,
-            specialRequests: formData.specialRequests
+            startDate: formData.startDate || undefined,
+            specialRequests: formData.specialRequests || undefined
           }),
         })
 
@@ -156,12 +149,12 @@ export default function BookingForm({ tour, onBookingSubmit, bookingData, setBoo
     <form onSubmit={handleSubmit} className="space-y-6">
       {/* Personal Information */}
       <div className="space-y-4">
-        <h3 className="text-lg font-semibold text-gray-900">ব্যক্তিগত তথ্য</h3>
+        <h3 className="text-lg font-semibold text-gray-900">Personal Information</h3>
         
         <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
           <div>
             <label htmlFor="customerName" className="block text-sm font-medium text-gray-700 mb-1">
-              পুরো নাম *
+              Full Name *
             </label>
             <input
               type="text"
@@ -172,7 +165,7 @@ export default function BookingForm({ tour, onBookingSubmit, bookingData, setBoo
               className={`w-full px-3 py-2 border rounded-lg focus:ring-2 focus:ring-green-500 focus:border-transparent ${
                 errors.customerName ? 'border-red-500' : 'border-gray-300'
               }`}
-              placeholder="আপনার পুরো নাম লিখুন"
+              placeholder="Enter your full name"
             />
             {errors.customerName && (
               <p className="text-red-500 text-sm mt-1">{errors.customerName}</p>
@@ -181,7 +174,7 @@ export default function BookingForm({ tour, onBookingSubmit, bookingData, setBoo
 
           <div>
             <label htmlFor="customerEmail" className="block text-sm font-medium text-gray-700 mb-1">
-              ইমেইল *
+              Email <span className="text-gray-400">(optional)</span>
             </label>
             <input
               type="email"
@@ -192,7 +185,7 @@ export default function BookingForm({ tour, onBookingSubmit, bookingData, setBoo
               className={`w-full px-3 py-2 border rounded-lg focus:ring-2 focus:ring-green-500 focus:border-transparent ${
                 errors.customerEmail ? 'border-red-500' : 'border-gray-300'
               }`}
-              placeholder="আপনার ইমেইল লিখুন"
+              placeholder="Enter your email (optional)"
             />
             {errors.customerEmail && (
               <p className="text-red-500 text-sm mt-1">{errors.customerEmail}</p>
@@ -201,7 +194,7 @@ export default function BookingForm({ tour, onBookingSubmit, bookingData, setBoo
 
           <div>
             <label htmlFor="customerPhone" className="block text-sm font-medium text-gray-700 mb-1">
-              ফোন নম্বর *
+              Phone Number *
             </label>
             <input
               type="tel"
@@ -212,7 +205,7 @@ export default function BookingForm({ tour, onBookingSubmit, bookingData, setBoo
               className={`w-full px-3 py-2 border rounded-lg focus:ring-2 focus:ring-green-500 focus:border-transparent ${
                 errors.customerPhone ? 'border-red-500' : 'border-gray-300'
               }`}
-              placeholder="০১৭১২৩৪৫৬৭৮ বা +৮৮০১৭১২৩৪৫৬৭৮"
+              placeholder="01712345678 or +8801712345678"
             />
             {errors.customerPhone && (
               <p className="text-red-500 text-sm mt-1">{errors.customerPhone}</p>
@@ -221,7 +214,7 @@ export default function BookingForm({ tour, onBookingSubmit, bookingData, setBoo
 
           <div>
             <label htmlFor="numberOfPeople" className="block text-sm font-medium text-gray-700 mb-1">
-              লোক সংখ্যা *
+              Number of People *
             </label>
             <div className="relative">
               <UsersIcon className="absolute left-3 top-1/2 transform -translate-y-1/2 h-5 w-5 text-gray-400" />
@@ -246,7 +239,7 @@ export default function BookingForm({ tour, onBookingSubmit, bookingData, setBoo
 
         <div>
           <label htmlFor="customerAddress" className="block text-sm font-medium text-gray-700 mb-1">
-            ঠিকানা *
+            Address <span className="text-gray-400">(optional)</span>
           </label>
           <textarea
             id="customerAddress"
@@ -257,7 +250,7 @@ export default function BookingForm({ tour, onBookingSubmit, bookingData, setBoo
             className={`w-full px-3 py-2 border rounded-lg focus:ring-2 focus:ring-green-500 focus:border-transparent ${
               errors.customerAddress ? 'border-red-500' : 'border-gray-300'
             }`}
-            placeholder="আপনার সম্পূর্ণ ঠিকানা লিখুন"
+            placeholder="Enter your complete address (optional)"
           />
           {errors.customerAddress && (
             <p className="text-red-500 text-sm mt-1">{errors.customerAddress}</p>
@@ -267,12 +260,12 @@ export default function BookingForm({ tour, onBookingSubmit, bookingData, setBoo
 
       {/* Travel Dates */}
       <div className="space-y-4">
-        <h3 className="text-lg font-semibold text-gray-900">ভ্রমণের তারিখ</h3>
+        <h3 className="text-lg font-semibold text-gray-900">Travel Dates</h3>
         
         <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
           <div>
             <label htmlFor="startDate" className="block text-sm font-medium text-gray-700 mb-1">
-              শুরুর তারিখ *
+              Start Date <span className="text-gray-400">(optional)</span>
             </label>
             <div className="relative">
               <CalendarDaysIcon className="absolute left-3 top-1/2 transform -translate-y-1/2 h-5 w-5 text-gray-400" />
@@ -294,7 +287,7 @@ export default function BookingForm({ tour, onBookingSubmit, bookingData, setBoo
 
           <div>
             <label htmlFor="endDate" className="block text-sm font-medium text-gray-700 mb-1">
-              শেষের তারিখ
+              End Date
             </label>
             <div className="relative">
               <CalendarDaysIcon className="absolute left-3 top-1/2 transform -translate-y-1/2 h-5 w-5 text-gray-400" />
@@ -309,7 +302,7 @@ export default function BookingForm({ tour, onBookingSubmit, bookingData, setBoo
               />
             </div>
             <p className="text-gray-500 text-sm mt-1">
-              স্বয়ংক্রিয়ভাবে গণনা করা হয়েছে ({tour.duration} দিন)
+              Automatically calculated ({tour.duration} days)
             </p>
           </div>
         </div>
@@ -317,11 +310,11 @@ export default function BookingForm({ tour, onBookingSubmit, bookingData, setBoo
 
       {/* Special Requests */}
       <div className="space-y-4">
-        <h3 className="text-lg font-semibold text-gray-900">বিশেষ অনুরোধ</h3>
+        <h3 className="text-lg font-semibold text-gray-900">Special Requests</h3>
         
         <div>
           <label htmlFor="specialRequests" className="block text-sm font-medium text-gray-700 mb-1">
-            বিশেষ অনুরোধ বা মন্তব্য
+            Special Requests or Comments <span className="text-gray-400">(optional)</span>
           </label>
           <textarea
             id="specialRequests"
@@ -330,26 +323,26 @@ export default function BookingForm({ tour, onBookingSubmit, bookingData, setBoo
             onChange={handleInputChange}
             rows={4}
             className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-green-500 focus:border-transparent"
-            placeholder="যদি আপনার কোনো বিশেষ অনুরোধ থাকে (যেমন: খাদ্য সংক্রান্ত, শারীরিক সীমাবদ্ধতা ইত্যাদি)"
+            placeholder="If you have any special requests (e.g., dietary requirements, physical limitations, etc.)"
           />
         </div>
       </div>
 
       {/* Price Summary */}
       <div className="bg-gray-50 rounded-lg p-4">
-        <h3 className="text-lg font-semibold text-gray-900 mb-3">মূল্যের সারসংক্ষেপ</h3>
+        <h3 className="text-lg font-semibold text-gray-900 mb-3">Price Summary</h3>
         <div className="space-y-2">
           <div className="flex justify-between">
-            <span className="text-gray-600">প্রতি জনের মূল্য</span>
+            <span className="text-gray-600">Price per person</span>
             <span className="font-medium">{formatPrice(tour.price)}</span>
           </div>
           <div className="flex justify-between">
-            <span className="text-gray-600">লোক সংখ্যা</span>
-            <span className="font-medium">{formData.numberOfPeople} জন</span>
+            <span className="text-gray-600">Number of people</span>
+            <span className="font-medium">{formData.numberOfPeople} people</span>
           </div>
           <div className="border-t border-gray-200 pt-2">
             <div className="flex justify-between text-lg font-bold">
-              <span>মোট মূল্য</span>
+              <span>Total Price</span>
               <span className="text-green-600">
                 {formatPrice(bookingData.totalPrice || tour.price)}
               </span>
@@ -364,7 +357,7 @@ export default function BookingForm({ tour, onBookingSubmit, bookingData, setBoo
           type="submit"
           className="bg-gradient-primary text-white px-8 py-3 rounded-lg hover:shadow-lg transition-all duration-200 font-medium"
         >
-          বুকিং নিশ্চিত করুন
+          Confirm Booking
         </button>
       </div>
     </form>

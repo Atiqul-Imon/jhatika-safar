@@ -48,7 +48,7 @@ function BookingPageContent() {
     // Here you would typically send the booking data to your API
     console.log('Booking submitted:', formData)
     // For now, we'll just show a success message
-    alert('আপনার বুকিং সফলভাবে জমা দেওয়া হয়েছে! আমরা শীঘ্রই আপনার সাথে যোগাযোগ করব।')
+    alert('Your booking has been submitted successfully! We will contact you soon.')
   }
 
   if (loading) {
@@ -56,7 +56,7 @@ function BookingPageContent() {
       <div className="min-h-screen bg-gray-50 flex items-center justify-center">
         <div className="text-center">
           <div className="animate-spin rounded-full h-12 w-12 border-b-2 border-blue-600 mx-auto mb-4"></div>
-          <p className="text-gray-600">ট্যুর লোড হচ্ছে...</p>
+          <p className="text-gray-600">Loading tour...</p>
         </div>
       </div>
     )
@@ -67,10 +67,10 @@ function BookingPageContent() {
       <div className="min-h-screen bg-gray-50 flex items-center justify-center">
         <div className="text-center">
           <h1 className="text-2xl font-bold text-gray-900 mb-4">
-            ট্যুর পাওয়া যায়নি
+            Tour Not Found
           </h1>
           <p className="text-gray-600">
-            অনুগ্রহ করে একটি বৈধ ট্যুর নির্বাচন করুন।
+            Please select a valid tour.
           </p>
         </div>
       </div>
@@ -83,10 +83,10 @@ function BookingPageContent() {
       <div className="bg-gradient-primary text-white py-12">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
           <h1 className="text-3xl md:text-4xl font-bold mb-4">
-            ট্যুর বুকিং
+            Tour Booking
           </h1>
           <p className="text-xl text-green-100">
-            আপনার স্বপ্নের ভ্রমণ শুরু করুন
+            Start your dream journey
           </p>
         </div>
       </div>
@@ -97,7 +97,7 @@ function BookingPageContent() {
           <div className="lg:col-span-1">
             <div className="bg-white rounded-2xl shadow-lg p-6 sticky top-8">
               <h2 className="text-2xl font-bold text-gray-900 mb-4">
-                ট্যুরের সারসংক্ষেপ
+                Tour Summary
               </h2>
               
               <div className="space-y-4">
@@ -114,7 +114,7 @@ function BookingPageContent() {
                   <div className="flex items-center space-x-3">
                     <MapPinIcon className="h-5 w-5 text-green-500" />
                     <div>
-                      <div className="font-medium text-gray-900">গন্তব্য</div>
+                      <div className="font-medium text-gray-900">Destinations</div>
                       <div className="text-sm text-gray-600">
                         {selectedTour.destinations.join(', ')}
                       </div>
@@ -124,9 +124,9 @@ function BookingPageContent() {
                   <div className="flex items-center space-x-3">
                     <ClockIcon className="h-5 w-5 text-green-500" />
                     <div>
-                      <div className="font-medium text-gray-900">সময়কাল</div>
+                      <div className="font-medium text-gray-900">Duration</div>
                       <div className="text-sm text-gray-600">
-                        {selectedTour.duration} দিন
+                        {selectedTour.duration} days
                       </div>
                     </div>
                   </div>
@@ -134,9 +134,9 @@ function BookingPageContent() {
                   <div className="flex items-center space-x-3">
                     <UsersIcon className="h-5 w-5 text-green-500" />
                     <div>
-                      <div className="font-medium text-gray-900">দলের আকার</div>
+                      <div className="font-medium text-gray-900">Group Size</div>
                       <div className="text-sm text-gray-600">
-                        {selectedTour.groupSize?.min || 1}-{selectedTour.groupSize?.max || 50} জন
+                        {selectedTour.groupSize?.min || 1}-{selectedTour.groupSize?.max || 50} people
                       </div>
                     </div>
                   </div>
@@ -144,21 +144,21 @@ function BookingPageContent() {
 
                 <div className="border-t border-gray-200 pt-4">
                   <div className="flex justify-between items-center mb-2">
-                    <span className="text-gray-600">মূল্য (প্রতি জন)</span>
+                    <span className="text-gray-600">Price (per person)</span>
                     <span className="font-semibold text-gray-900">
                       {formatPrice(selectedTour.price)}
                     </span>
                   </div>
                   {selectedTour.originalPrice && (
                     <div className="flex justify-between items-center mb-2">
-                      <span className="text-gray-600">ছাড়</span>
+                      <span className="text-gray-600">Discount</span>
                       <span className="text-green-600 font-semibold">
                         {formatPrice(selectedTour.originalPrice - selectedTour.price)}
                       </span>
                     </div>
                   )}
                   <div className="flex justify-between items-center text-lg font-bold">
-                    <span>মোট মূল্য</span>
+                    <span>Total Price</span>
                     <span className="text-green-600">
                       {formatPrice(bookingData.totalPrice || selectedTour.price)}
                     </span>
@@ -172,7 +172,7 @@ function BookingPageContent() {
           <div className="lg:col-span-2">
             <div className="bg-white rounded-2xl shadow-lg p-6">
               <h2 className="text-2xl font-bold text-gray-900 mb-6">
-                বুকিং ফর্ম
+                Booking Form
               </h2>
               
               <BookingForm

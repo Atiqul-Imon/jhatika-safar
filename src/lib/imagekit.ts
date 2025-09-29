@@ -22,7 +22,8 @@ export const uploadToImageKit = async (file: Buffer, fileName: string, folder: s
       fileName: fileName,
       folder: folder,
       useUniqueFileName: true,
-      overwriteFile: false
+      overwriteFile: false,
+      isPrivateFile: false // Ensure images are public
     })
     return result
   } catch (error) {

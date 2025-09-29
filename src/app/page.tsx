@@ -196,7 +196,7 @@ export default function Home() {
       <TestimonialSection />
 
       {/* CTA Section */}
-      <section className="py-20 bg-gradient-to-br from-slate-900 via-blue-900 to-slate-800 relative overflow-hidden">
+      <section className="py-20 bg-gradient-to-br from-green-600 via-green-700 to-green-800 relative overflow-hidden">
         {/* Professional Background Pattern */}
         <div className="absolute inset-0 opacity-10">
           <div className="absolute top-0 left-0 w-96 h-96 bg-blue-400 rounded-full mix-blend-multiply filter blur-3xl"></div>
@@ -208,7 +208,7 @@ export default function Home() {
           <h2 className="text-4xl md:text-5xl font-bold text-white mb-6 font-serif">
             Start Your Dream Journey Now
           </h2>
-          <p className="text-xl text-blue-100 mb-10 max-w-3xl mx-auto leading-relaxed">
+          <p className="text-xl text-green-100 mb-10 max-w-3xl mx-auto leading-relaxed">
             Travel to the most beautiful places in Bangladesh and create unforgettable memories that will last a lifetime.
           </p>
           <div className="flex flex-col sm:flex-row gap-6 justify-center">

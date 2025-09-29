@@ -26,7 +26,6 @@ const BookingSchema = new Schema<IBooking>({
   },
   customerEmail: {
     type: String,
-    required: [true, 'Customer email is required'],
     trim: true,
     lowercase: true,
     match: [/^\w+([.-]?\w+)*@\w+([.-]?\w+)*(\.\w{2,3})+$/, 'Please enter a valid email']
@@ -54,8 +53,7 @@ const BookingSchema = new Schema<IBooking>({
     max: [50, 'Maximum 50 people allowed']
   },
   startDate: {
-    type: Date,
-    required: [true, 'Start date is required']
+    type: Date
   },
   endDate: {
     type: Date

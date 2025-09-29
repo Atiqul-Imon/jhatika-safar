@@ -5,9 +5,9 @@ import Link from 'next/link'
 import { MagnifyingGlassIcon, CalendarDaysIcon, MapPinIcon } from '@heroicons/react/24/outline'
 
 export default function HeroSection() {
-  const [searchQuery, setSearchQuery] = useState('')
   const [selectedDate, setSelectedDate] = useState('')
   const [selectedLocation, setSelectedLocation] = useState('')
+  const [isSearching, setIsSearching] = useState(false)
 
   const locations = [
     'Sundarbans',
@@ -17,6 +17,34 @@ export default function HeroSection() {
     'Chittagong',
     'Rangpur'
   ]
+
+  const handleSearch = async (e: React.FormEvent) => {
+    e.preventDefault()
+    
+    if (!selectedLocation || !selectedDate) {
+      alert('Please select both destination and date to search for tours.')
+      return
+    }
+
+    setIsSearching(true)
+    
+    try {
+      // Build search URL with parameters
+      const searchParams = new URLSearchParams({
+        destination: selectedLocation,
+        date: selectedDate,
+        status: 'active'
+      })
+      
+      // Navigate to tours page with search parameters
+      window.location.href = `/tours?${searchParams.toString()}`
+    } catch (error) {
+      console.error('Search error:', error)
+      alert('Search failed. Please try again.')
+    } finally {
+      setIsSearching(false)
+    }
+  }
 
   return (
     <section className="relative h-screen min-h-[500px] sm:min-h-[600px] flex items-center justify-center overflow-hidden hero-section">
@@ -46,7 +74,7 @@ export default function HeroSection() {
 
           {/* Search Form */}
           <div className="max-w-4xl mx-auto bg-white rounded-xl sm:rounded-2xl p-3 sm:p-4 md:p-6 shadow-2xl mx-2 sm:mx-4 hero-form">
-            <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-2 sm:gap-3 md:gap-4">
+            <form onSubmit={handleSearch} className="grid grid-cols-1 sm:grid-cols-3 gap-2 sm:gap-3 md:gap-4">
               {/* Location Search */}
               <div className="relative">
                 <MapPinIcon className="absolute left-3 top-1/2 transform -translate-y-1/2 h-4 w-4 sm:h-5 sm:w-5 text-gray-400" />
@@ -75,28 +103,26 @@ export default function HeroSection() {
                 />
               </div>
 
-              {/* Search Query */}
-              <div className="relative">
-                <MagnifyingGlassIcon className="absolute left-3 top-1/2 transform -translate-y-1/2 h-4 w-4 sm:h-5 sm:w-5 text-gray-400" />
-                    <input
-                      type="text"
-                      value={searchQuery}
-                      onChange={(e) => setSearchQuery(e.target.value)}
-                      placeholder="Search tours..."
-                      className="w-full pl-9 sm:pl-10 pr-3 sm:pr-4 py-2 sm:py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-green-500 focus:border-transparent text-sm sm:text-base"
-                    />
-              </div>
-
               {/* Search Button */}
-                  <Link
-                    href="/tours"
-                    className="bg-gradient-primary text-white px-3 sm:px-4 md:px-6 py-2 sm:py-3 rounded-lg hover:shadow-lg transition-all duration-200 font-medium flex items-center justify-center text-sm sm:text-base"
-                  >
+              <button
+                type="submit"
+                disabled={isSearching}
+                className="bg-gradient-to-r from-green-600 to-green-700 text-white px-3 sm:px-4 md:px-6 py-2 sm:py-3 rounded-lg hover:shadow-lg transition-all duration-200 font-medium flex items-center justify-center text-sm sm:text-base disabled:opacity-50 disabled:cursor-not-allowed"
+              >
+                {isSearching ? (
+                  <>
+                    <div className="animate-spin rounded-full h-4 w-4 sm:h-5 sm:w-5 border-b-2 border-white mr-1 sm:mr-2"></div>
+                    <span>Searching...</span>
+                  </>
+                ) : (
+                  <>
                     <MagnifyingGlassIcon className="h-4 w-4 sm:h-5 sm:w-5 mr-1 sm:mr-2" />
-                    <span className="hidden xs:inline">Search</span>
-                    <span className="xs:hidden">Go</span>
-                  </Link>
-            </div>
+                    <span className="hidden xs:inline">Search Tours</span>
+                    <span className="xs:hidden">Search</span>
+                  </>
+                )}
+              </button>
+            </form>
           </div>
 
           {/* Quick Stats */}
@@ -117,24 +143,6 @@ export default function HeroSection() {
         </div>
       </div>
 
-      {/* Scroll Indicator */}
-      <div className="absolute bottom-4 sm:bottom-8 left-1/2 transform -translate-x-1/2 z-10 hidden sm:block">
-        <div className="animate-bounce bg-white bg-opacity-95 rounded-full p-2 shadow-lg">
-          <svg
-            className="w-5 h-5 sm:w-6 sm:h-6 text-blue-600"
-            fill="none"
-            stroke="currentColor"
-            viewBox="0 0 24 24"
-          >
-            <path
-              strokeLinecap="round"
-              strokeLinejoin="round"
-              strokeWidth={2}
-              d="M19 14l-7 7m0 0l-7-7m7 7V3"
-            />
-          </svg>
-        </div>
-      </div>
     </section>
   )
 }
