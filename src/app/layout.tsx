@@ -21,6 +21,16 @@ export const metadata: Metadata = {
   description: "Discover the most beautiful places in Bangladesh. Premium tour packages to Sundarbans, Cox's Bazar, Sylhet and other destinations across the country.",
   keywords: "Bangladesh travel, travel agency, Sundarbans, Cox's Bazar, Sylhet, tour packages",
   authors: [{ name: "Jhatika Safar" }],
+  icons: {
+    icon: [
+      { url: '/favicon-16x16.png', sizes: '16x16', type: 'image/png' },
+      { url: '/favicon-32x32.png', sizes: '32x32', type: 'image/png' },
+      { url: '/favicon.ico', sizes: 'any' }
+    ],
+    apple: [
+      { url: '/apple-touch-icon.png', sizes: '180x180', type: 'image/png' }
+    ],
+  },
   openGraph: {
     title: "Jhatika Safar - Bangladesh's Premier Travel Agency",
     description: "Discover the most beautiful places in Bangladesh",
