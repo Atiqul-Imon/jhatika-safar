@@ -59,8 +59,10 @@ export default function ContactPage() {
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault()
+    console.log('Form submitted with data:', formData)
     
     if (validateForm()) {
+      console.log('Form validation passed, sending request...')
       try {
         const response = await fetch('/api/contact-messages', {
           method: 'POST',
@@ -70,7 +72,9 @@ export default function ContactPage() {
           body: JSON.stringify(formData),
         })
 
+        console.log('Response status:', response.status)
         const result = await response.json()
+        console.log('Response result:', result)
 
         if (result.success) {
           alert('Your message has been sent successfully! We will contact you soon.')
@@ -82,12 +86,14 @@ export default function ContactPage() {
             message: ''
           })
         } else {
-          alert('Failed to send message. Please try again.')
+          alert(`Failed to send message: ${result.message || 'Please try again.'}`)
         }
       } catch (error) {
         console.error('Error sending message:', error)
         alert('Failed to send message. Please try again.')
       }
+    } else {
+      console.log('Form validation failed')
     }
   }
 
