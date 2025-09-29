@@ -143,7 +143,7 @@ export default function Footer() {
               <div className="flex items-center space-x-3">
                 <PhoneIcon className="h-5 w-5 text-green-500" />
                 <span className="text-gray-300 text-sm font-medium">
-                  +৮৮০ ১৭১৭-১৫১৬৩৬
+                  +880 1717-151636
                 </span>
               </div>
               <div className="flex items-center space-x-3">
