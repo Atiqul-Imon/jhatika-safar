@@ -73,12 +73,6 @@ export default function Header() {
               <PhoneIcon className="h-4 w-4" />
               <span>Call Us</span>
             </a>
-            <Link
-              href="/booking"
-              className="bg-green-600 hover:bg-green-700 text-white px-6 py-2 rounded-lg hover:shadow-lg transition-all duration-200 font-medium"
-            >
-              Book Now
-            </Link>
           </div>
 
           {/* Mobile menu button */}
@@ -137,13 +131,6 @@ export default function Header() {
                 <PhoneIcon className="h-4 w-4" />
                 <span>Call Us</span>
               </a>
-              <Link
-                href="/booking"
-                className="bg-green-600 hover:bg-green-700 text-white block px-3 py-2 rounded-lg text-center font-medium"
-                onClick={() => setMobileMenuOpen(false)}
-              >
-                Book Now
-              </Link>
             </div>
           </div>
         </div>

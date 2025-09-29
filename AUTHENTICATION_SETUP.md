@@ -44,7 +44,7 @@ npm run create-admin
 ```
 
 This will create an admin user with:
-- **Email:** admin@jhatikasofor.com
+- **Email:** info@jhatikasafar.com
 - **Password:** admin123
 - **Role:** admin
 
@@ -79,7 +79,7 @@ npm run dev
 ### Accessing Admin Panel
 1. Navigate to `http://localhost:3000/login`
 2. Use the demo credentials:
-   - **Email:** admin@jhatikasofor.com
+   - **Email:** info@jhatikasafar.com
    - **Password:** admin123
 3. You'll be redirected to `/admin` upon successful login
 

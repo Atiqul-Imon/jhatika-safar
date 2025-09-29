@@ -45,7 +45,7 @@ export default function SettingsPage() {
     general: {
       siteName: 'Jhatika Safar',
       siteDescription: 'Your trusted travel partner in Bangladesh',
-      contactEmail: 'info@jhatikasofor.com',
+      contactEmail: 'info.jhatikasafar@gmail.com',
       contactPhone: '+880 1234 567890',
       address: 'Dhaka, Bangladesh'
     },

@@ -61,19 +61,16 @@ export default function HeroSection() {
       </div>
 
       {/* Content */}
-      <div className="relative z-10 max-w-7xl mx-auto px-3 sm:px-6 lg:px-8 text-center hero-content">
+      <div className="relative z-10 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center hero-content">
         <div className="animate-fade-in-up">
-          <h1 className="text-2xl xs:text-3xl sm:text-4xl md:text-5xl lg:text-6xl xl:text-7xl font-bold mb-3 sm:mb-4 md:mb-6 leading-tight hero-title font-sans">
-            <span className="text-red-800">Discover</span>
-            <span className="block text-green-800 mt-1 sm:mt-2">Bangladesh's</span>
-            <span className="text-red-800">Beautiful Places</span>
+          <h1 className="text-4xl xs:text-5xl sm:text-6xl md:text-6xl lg:text-7xl xl:text-8xl 2xl:text-9xl font-bold mb-3 sm:mb-4 md:mb-6 lg:mb-8 xl:mb-10 leading-tight hero-title font-serif tracking-tight">
+            <span className="text-red-800 drop-shadow-lg">Discover</span>
+            <span className="block text-green-800 mt-1 sm:mt-2 md:mt-3 lg:mt-4 drop-shadow-lg">Bangladesh's</span>
+            <span className="text-red-800 drop-shadow-lg">Beautiful Places</span>
           </h1>
-          <p className="text-base sm:text-lg md:text-xl lg:text-2xl text-white mb-4 sm:mb-6 md:mb-8 max-w-2xl sm:max-w-3xl mx-auto px-2 sm:px-4 font-sans leading-relaxed">
-            Travel with Jhatika Safar and create unforgettable memories
-          </p>
 
           {/* Search Form */}
-          <div className="max-w-4xl mx-auto bg-white rounded-xl sm:rounded-2xl p-3 sm:p-4 md:p-6 shadow-2xl mx-2 sm:mx-4 hero-form">
+          <div className="max-w-4xl mx-auto bg-white/95 backdrop-blur-sm rounded-xl lg:rounded-2xl p-3 sm:p-4 md:p-5 lg:p-6 shadow-2xl mx-2 sm:mx-4 hero-form">
             <form onSubmit={handleSearch} className="grid grid-cols-1 sm:grid-cols-3 gap-2 sm:gap-3 md:gap-4">
               {/* Location Search */}
               <div className="relative">
@@ -81,7 +78,7 @@ export default function HeroSection() {
                     <select
                       value={selectedLocation}
                       onChange={(e) => setSelectedLocation(e.target.value)}
-                      className="w-full pl-9 sm:pl-10 pr-3 sm:pr-4 py-2 sm:py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-green-500 focus:border-transparent text-sm sm:text-base"
+                      className="w-full pl-9 sm:pl-10 pr-3 sm:pr-4 py-2.5 sm:py-3 md:py-4 border border-gray-300 rounded-lg focus:ring-2 focus:ring-green-500 focus:border-transparent text-sm sm:text-base font-medium bg-white/90 backdrop-blur-sm"
                     >
                       <option value="">Select Destination</option>
                       {locations.map((location) => (
@@ -99,7 +96,7 @@ export default function HeroSection() {
                   type="date"
                   value={selectedDate}
                   onChange={(e) => setSelectedDate(e.target.value)}
-                  className="w-full pl-9 sm:pl-10 pr-3 sm:pr-4 py-2 sm:py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-green-500 focus:border-transparent text-sm sm:text-base"
+                  className="w-full pl-9 sm:pl-10 pr-3 sm:pr-4 py-2.5 sm:py-3 md:py-4 border border-gray-300 rounded-lg focus:ring-2 focus:ring-green-500 focus:border-transparent text-sm sm:text-base font-medium bg-white/90 backdrop-blur-sm"
                 />
               </div>
 
@@ -107,7 +104,7 @@ export default function HeroSection() {
               <button
                 type="submit"
                 disabled={isSearching}
-                className="bg-gradient-to-r from-green-600 to-green-700 text-white px-3 sm:px-4 md:px-6 py-2 sm:py-3 rounded-lg hover:shadow-lg transition-all duration-200 font-medium flex items-center justify-center text-sm sm:text-base disabled:opacity-50 disabled:cursor-not-allowed"
+                className="bg-gradient-to-r from-green-600 to-green-700 hover:from-green-700 hover:to-green-800 text-white px-3 sm:px-4 md:px-6 py-2.5 sm:py-3 md:py-4 rounded-lg hover:shadow-xl transition-all duration-300 font-semibold flex items-center justify-center text-sm sm:text-base disabled:opacity-50 disabled:cursor-not-allowed transform hover:-translate-y-1"
               >
                 {isSearching ? (
                   <>
@@ -125,19 +122,21 @@ export default function HeroSection() {
             </form>
           </div>
 
-          {/* Quick Stats */}
-          <div className="mt-6 sm:mt-8 md:mt-12 grid grid-cols-1 sm:grid-cols-3 gap-3 sm:gap-4 md:gap-6 lg:gap-8 max-w-4xl mx-auto px-3 sm:px-4">
-            <div className="text-center bg-green-600 rounded-xl p-3 sm:p-4 md:p-5 shadow-xl hover:shadow-2xl transition-all duration-300 transform hover:-translate-y-1">
-              <div className="text-xl xs:text-2xl sm:text-3xl md:text-4xl lg:text-5xl font-bold text-white mb-1 sm:mb-2 md:mb-3">500+</div>
-              <div className="text-green-100 text-xs xs:text-sm sm:text-base font-medium">Successful Tours</div>
-            </div>
-            <div className="text-center bg-red-600 rounded-xl p-3 sm:p-4 md:p-5 shadow-xl hover:shadow-2xl transition-all duration-300 transform hover:-translate-y-1">
-              <div className="text-xl xs:text-2xl sm:text-3xl md:text-4xl lg:text-5xl font-bold text-white mb-1 sm:mb-2 md:mb-3">1000+</div>
-              <div className="text-red-100 text-xs xs:text-sm sm:text-base font-medium">Happy Customers</div>
-            </div>
-            <div className="text-center bg-amber-600 rounded-xl p-3 sm:p-4 md:p-5 shadow-xl hover:shadow-2xl transition-all duration-300 transform hover:-translate-y-1">
-              <div className="text-xl xs:text-2xl sm:text-3xl md:text-4xl lg:text-5xl font-bold text-white mb-1 sm:mb-2 md:mb-3">15+</div>
-              <div className="text-amber-100 text-xs xs:text-sm sm:text-base font-medium">Destinations</div>
+          {/* Quick Stats - Hidden on mobile, visible on larger screens */}
+          <div className="hidden md:block mt-8 lg:mt-12 xl:mt-16">
+            <div className="grid grid-cols-3 gap-4 lg:gap-6 xl:gap-8 max-w-4xl mx-auto px-4">
+              <div className="text-center bg-green-600/90 backdrop-blur-sm rounded-xl p-4 lg:p-5 xl:p-6 shadow-xl hover:shadow-2xl transition-all duration-300 transform hover:-translate-y-1">
+                <div className="text-3xl lg:text-4xl xl:text-5xl font-bold text-white mb-2 lg:mb-3">500+</div>
+                <div className="text-green-100 text-sm lg:text-base font-medium">Successful Tours</div>
+              </div>
+              <div className="text-center bg-red-600/90 backdrop-blur-sm rounded-xl p-4 lg:p-5 xl:p-6 shadow-xl hover:shadow-2xl transition-all duration-300 transform hover:-translate-y-1">
+                <div className="text-3xl lg:text-4xl xl:text-5xl font-bold text-white mb-2 lg:mb-3">1000+</div>
+                <div className="text-red-100 text-sm lg:text-base font-medium">Happy Customers</div>
+              </div>
+              <div className="text-center bg-amber-600/90 backdrop-blur-sm rounded-xl p-4 lg:p-5 xl:p-6 shadow-xl hover:shadow-2xl transition-all duration-300 transform hover:-translate-y-1">
+                <div className="text-3xl lg:text-4xl xl:text-5xl font-bold text-white mb-2 lg:mb-3">15+</div>
+                <div className="text-amber-100 text-sm lg:text-base font-medium">Destinations</div>
+              </div>
             </div>
           </div>
         </div>

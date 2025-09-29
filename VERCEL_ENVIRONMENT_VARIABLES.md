@@ -65,7 +65,7 @@ EMAIL_SERVER_HOST=smtp.gmail.com
 EMAIL_SERVER_PORT=587
 EMAIL_SERVER_USER=your-email@gmail.com
 EMAIL_SERVER_PASSWORD=your-app-password
-EMAIL_FROM=noreply@jhatikasofor.com
+EMAIL_FROM=noreply@jhatikasafar.com
 ```
 
 ## 🔧 **How to Set Environment Variables in Vercel**
@@ -122,7 +122,7 @@ EMAIL_SERVER_HOST=smtp.gmail.com
 EMAIL_SERVER_PORT=587
 EMAIL_SERVER_USER=your-email@gmail.com
 EMAIL_SERVER_PASSWORD=your-app-password
-EMAIL_FROM=noreply@jhatikasofor.com
+EMAIL_FROM=noreply@jhatikasafar.com
 ```
 
 ## 🚨 **Security Best Practices**

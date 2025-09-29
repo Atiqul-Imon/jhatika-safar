@@ -149,7 +149,7 @@ export default function Footer() {
               <div className="flex items-center space-x-3">
                 <EnvelopeIcon className="h-5 w-5 text-green-500" />
                 <span className="text-gray-300 text-sm font-medium">
-                  info@jhatikasofor.com
+                  info.jhatikasafar@gmail.com
                 </span>
               </div>
             </div>

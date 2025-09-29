@@ -156,7 +156,7 @@ export default function AdminSidebar({ isOpen, onToggle }: AdminSidebarProps) {
                   {user?.name || 'Admin User'}
                 </p>
                 <p className="text-xs text-gray-300 truncate">
-                  {user?.email || 'admin@jhatikasofor.com'}
+                  {user?.email || 'info@jhatikasafar.com'}
                 </p>
               </div>
             </div>

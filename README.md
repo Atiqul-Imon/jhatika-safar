@@ -89,7 +89,7 @@ Visit `http://localhost:3000` to see the application.
 
 ## 🔐 Default Admin Credentials
 
-- **Email**: `admin@jhatikasofor.com`
+- **Email**: `info@jhatikasafar.com`
 - **Password**: `admin123`
 
 **⚠️ Important**: Change these credentials in production!
@@ -253,7 +253,7 @@ This project is licensed under the MIT License - see the [LICENSE](LICENSE) file
 
 For support and questions:
 - Create an issue in the GitHub repository
-- Contact: admin@jhatikasofor.com
+- Contact: info.jhatikasafar@gmail.com
 
 ## 🔄 Version History
 

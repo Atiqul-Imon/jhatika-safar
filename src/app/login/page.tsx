@@ -158,7 +158,7 @@ export default function LoginPage() {
 
             <div className="mt-4 text-center">
               <div className="text-sm text-gray-600">
-                <p><strong>Email:</strong> admin@jhatikasafar.com</p>
+                <p><strong>Email:</strong> info.jhatikasafar@gmail.com</p>
                 <p><strong>Password:</strong> admin123</p>
               </div>
             </div>

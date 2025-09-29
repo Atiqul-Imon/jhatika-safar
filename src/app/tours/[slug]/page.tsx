@@ -342,7 +342,7 @@ export default async function TourDetailPage({ params }: TourDetailPageProps) {
                 </p>
                 <div className="space-y-2 text-sm">
                   <div>📞 +৮৮০ ১৭১৭-১৫১৬৩৬</div>
-                  <div>✉️ info@jhatikasofor.com</div>
+                  <div>✉️ info.jhatikasafar@gmail.com</div>
                 </div>
               </div>
             </div>
