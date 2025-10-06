@@ -3,6 +3,7 @@ import { Roboto, Playfair_Display } from "next/font/google";
 import "./globals.css";
 import Header from "@/components/layout/Header";
 import Footer from "@/components/layout/Footer";
+import WhatsAppWidget from "@/components/ui/WhatsAppWidget";
 import { AuthProvider } from "@/contexts/AuthContext";
 
 const roboto = Roboto({
@@ -55,6 +56,13 @@ export default function RootLayout({
             </main>
             <Footer />
           </div>
+          <WhatsAppWidget 
+            phoneNumber={process.env.WHATSAPP_PHONE_NUMBER || "+8801717151636"}
+            message={process.env.WHATSAPP_DEFAULT_MESSAGE || "Hello! I would like to know more about your tour packages. Can you help me with information about your available tours?"}
+            position="bottom-right"
+            showOnMobile={true}
+            showOnDesktop={true}
+          />
         </AuthProvider>
       </body>
     </html>
